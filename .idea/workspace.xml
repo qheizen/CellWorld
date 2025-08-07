@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5d13bb5f-aeaa-4553-a5a2-32a39c23f1f4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/CellsWorld.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/cell.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/world_state.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/json_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Logger/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Logger/loggers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CellWorld/__init__.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="30i00PwhMRY2sJdg6fBKjN2p0vl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests for json_parser_test.TestJsonParser.test_dump_json_to_file_empty_data.executor": "Run",
+    "Python tests.Python tests for json_parser_test.TestJsonParser.test_dump_json_to_file_invalid_path.executor": "Run",
+    "Python tests.Python tests for json_parser_test.TestJsonParser.test_load_json_from_file_success.executor": "Run",
+    "Python tests.Python tests for json_parser_test.TestJsonParser.test_path_to_recent_file_persistence.executor": "Run",
+    "Python tests.Python tests in json_parser_test.py.executor": "Run",
+    "Python.json_parser.executor": "Run",
+    "Python.s.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/Python/Fun/CellsWorld/CellWorld"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Python\Fun\CellsWorld\CellWorld" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Python\Fun\CellsWorld\CellWorld" />
+      <recent name="E:\Python\Fun\CellsWorld\CellWorld\Tools" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d13bb5f-aeaa-4553-a5a2-32a39c23f1f4" name="Changes" comment="" />
+      <created>1754094862925</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754094862925</updated>
+    </task>
+    <servers />
+  </component>
+</project>

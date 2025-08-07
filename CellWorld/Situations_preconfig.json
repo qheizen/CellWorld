@@ -1,0 +1,115 @@
+{
+  "global_options": {
+    "credentials": {
+      "fps_lock": "target fps counter",
+      "window_size": ["window_x", "window_y"],
+      "background_color": []
+    },
+    "physical": {
+      "wall_margin": "wall_margin",
+      "wall_strength": "wall_strength",
+      "constant_g": "GLOBAL_G_CONSTANT"
+    }
+  },
+
+  "cell_options": [
+    {
+      "credentials": {
+        "cell_name": "cell_name",
+        "cell_color": "cell_color",
+        "is_movable": "is_cell_movable"
+      },
+
+      "physical": {
+        "is_enabled": "is_module_enabled",
+
+        "cell_mass": "cell_mass",
+        "cell_min_speed": "cell_min_speed",
+        "cell_max_speed": "cell_max_speed",
+        "strength": "cell_strength",
+
+        "is_gravitate": "is_cell_attracted_by_physic"
+      },
+
+      "life": {
+        "is_enabled": "is_module_enabled",
+
+        "metabolism_rate": "METABOLISM_IN_SECOND",
+        "energy_coefficient": "energy_coef",
+        "hunger_border": "hunger_mode_coef",
+
+        "eat_radius": "eating_radius",
+        "lifetime": "how_much_time_cell_can_live",
+
+        "is_mortal": "can_cell_die",
+        "is_can_be_hungered": "cell_hunger_mode_flag",
+        "food": [
+          {"cell_types": "", "stats_multiplier": ""}
+        ],
+
+        "spawner": {
+          "is_enabled": "is_module_enabled",
+
+          "spawn_cell_types": [],
+          "spawned_start_speed": "",
+          "spawn_delay": "",
+          "spawn_directions": [[],[]],
+          "max_spawn_number": "",
+
+          "genetic": {
+            "mutation_rate": "",
+            "crossover_rate": ""
+          }
+        }
+
+      },
+
+      "community": {
+        "is_enabled": "IS_MODULE_ENABLED",
+
+        "attached_offsets": [
+          {"cell_type_name": "", "offset": ""}
+        ],
+
+        "relationship": [
+          {"cell_type_name": "", "relation": "", "preferred_distance": "", "hunger_distance": ""}
+        ],
+
+        "friendship": [
+          {"cell_type_name": "", "friend_distance": "", "is_line_need": ""}
+        ]
+      },
+
+      "actions": [
+        {"trigger_name_func": "", "event_name": ""}
+      ]
+    }
+  ],
+
+  "cell_groups": [
+     {
+      "credentials": {
+        "name": ""
+      },
+      "group": {
+        "cell_type_name": "",
+        "cell_count": "",
+        "spawn_radius": ""
+      }
+    }
+  ],
+
+  "game_events": [
+     {
+      "credentials": {
+        "name": "",
+        "description": "",
+        "event_type": ""
+      },
+
+      "functions": [[]],
+
+      "activation_time": ""
+    }
+  ]
+}
