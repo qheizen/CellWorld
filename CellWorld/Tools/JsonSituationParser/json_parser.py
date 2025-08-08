@@ -9,6 +9,9 @@ class JsonParser:
     _path_to_recent_file = None
 
     def load_json_from_file(self, filepath: str) -> dict:
+        """
+        Выгружает из .json файла по пути filepath информацию в виде словаря
+        """
         if not self._check_filepath_correctness(filepath):
             return {}
 
@@ -20,6 +23,9 @@ class JsonParser:
             return result
 
     def dump_json_to_file(self, data: dict, filepath: str) -> None:
+        """
+        Записывает в .json файл текущее состояние сцены
+        """
         if not self._check_filepath_correctness(filepath) or not data:
             return
 

@@ -15,7 +15,7 @@
   "cell_options": [
     {
       "credentials": {
-        "cell_name": "cell_name",
+        "name": "cell_name",
         "cell_color": "cell_color",
         "is_movable": "is_cell_movable"
       },

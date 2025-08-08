@@ -5,23 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d13bb5f-aeaa-4553-a5a2-32a39c23f1f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CellsWorld.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/cell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/world_state.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/json_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Logger/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/Logger/loggers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/Tools/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CellWorld/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellWorld/Tools/Entities/world_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/world_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/json_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/json_parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,20 +34,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for json_parser_test.TestJsonParser.test_dump_json_to_file_empty_data.executor": "Run",
-    "Python tests.Python tests for json_parser_test.TestJsonParser.test_dump_json_to_file_invalid_path.executor": "Run",
-    "Python tests.Python tests for json_parser_test.TestJsonParser.test_load_json_from_file_success.executor": "Run",
-    "Python tests.Python tests for json_parser_test.TestJsonParser.test_path_to_recent_file_persistence.executor": "Run",
-    "Python tests.Python tests in json_parser_test.py.executor": "Run",
-    "Python.json_parser.executor": "Run",
-    "Python.s.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "E:/Python/Fun/CellsWorld/CellWorld"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for json_parser_test.TestJsonParser.test_dump_json_to_file_empty_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for json_parser_test.TestJsonParser.test_dump_json_to_file_invalid_path.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for json_parser_test.TestJsonParser.test_load_json_from_file_success.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for json_parser_test.TestJsonParser.test_path_to_recent_file_persistence.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in json_parser_test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.json_parser.executor&quot;: &quot;Run&quot;,
+    &quot;Python.s.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Python/Fun/CellsWorld/CellWorld&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Python\Fun\CellsWorld\CellWorld" />
