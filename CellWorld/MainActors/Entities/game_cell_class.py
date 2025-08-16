@@ -63,7 +63,6 @@ class CellType(GameActor):
             if init_func := options_tags[tag]:
                 init_func(values)
                 
-        self.__post_init_eval()
         _logger.info(f"CellType - '{self.name}' - was created!")
     
     def __safe_setter(self, link_dict: dict, values_dict: dict):

@@ -81,10 +81,11 @@
   "cell_groups": [
      {
       "credentials": {
-        "name": ""
+        "name": "",
+        "start_pos"
       },
       "group": {
-        "cell_type_name": "",
+        "cells_type_names": "",
         "cell_count": "",
         "spawn_radius": ""
       }

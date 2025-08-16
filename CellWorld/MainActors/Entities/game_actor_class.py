@@ -11,6 +11,9 @@ class GameActor:
         self._world_manager: WorldManager = None
         self._object_state = "non_initiated"
         
+    def init(self):
+        pass
+        
     def set_position(self, new_pos: Vector2):
         self._vector_position = self.safe_vector2_convert(new_pos)
             
@@ -61,7 +64,7 @@ class GameActor:
         return self._world_manager.get_option("wall_strength", "float")
     
     def get_constants(self):
-        return self._world_manager.get_option("constant", "dict")
+        return self._world_manager.get_option("constants", "dict")
     
     def trigger_action(self, name, args):
         self._world_manager.trigger_action(name, args, self)
@@ -82,3 +85,9 @@ class GameActor:
     
     def get_cell_with_name(self, name: str):
         return self._world_manager.get_cell_type(name)
+    
+    def initiate_update(self):
+        pass
+    
+    def initiate_spawner_ability(self):
+        pass

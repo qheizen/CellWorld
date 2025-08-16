@@ -29,17 +29,19 @@ class WorldSerializer:
         _logger.critical(f"World serialized!")
     
     def __serialize_global_options(segment: dict, world_manager: WorldManager):
-        world_manager.change_world_options(segment)
+        return world_manager.change_world_options(segment)
     
     def __serialize_cell_options(segment: list, world_manager: WorldManager):
         for cell_type in segment:
             world_manager.add_cell_type(cell_type)
+        return world_manager
     
     def __serialize_cell_groups(segment: list, world_manager: WorldManager):
         for cell_group in segment:
             world_manager.add_cell_group(cell_group)
+        return world_manager
     
     def __serialize_game_events(segment: list, world_manager: WorldManager):
         for event in segment:
             world_manager.add_event(event)
-        
+        return world_manager
