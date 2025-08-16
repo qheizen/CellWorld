@@ -16,26 +16,24 @@
     {
       "credentials": {
         "name": "cell_name",
-        "cell_color": "cell_color",
-        "is_movable": "is_cell_movable"
+        "color": "cell_color",
+        "start_pos": "start_pos",
+        "start_vel": "start_vel",
+        "size": "size"
       },
-
+      
       "physical": {
-        "is_enabled": "is_module_enabled",
-
         "cell_mass": "cell_mass",
         "cell_min_speed": "cell_min_speed",
         "cell_max_speed": "cell_max_speed",
         "strength": "cell_strength",
-
+        
+        "is_movable": "is_cell_movable",
         "is_gravitate": "is_cell_attracted_by_physic"
       },
 
       "life": {
-        "is_enabled": "is_module_enabled",
-
         "metabolism_rate": "METABOLISM_IN_SECOND",
-        "energy_coefficient": "energy_coef",
         "hunger_border": "hunger_mode_coef",
 
         "eat_radius": "eating_radius",
@@ -44,29 +42,23 @@
         "is_mortal": "can_cell_die",
         "is_can_be_hungered": "cell_hunger_mode_flag",
         "food": [
-          {"cell_types": "", "stats_multiplier": ""}
+          {"cell_type_name": "", "stats_multiplier": ""}
         ],
 
         "spawner": {
-          "is_enabled": "is_module_enabled",
-
           "spawn_cell_types": [],
           "spawned_start_speed": "",
           "spawn_delay": "",
           "spawn_directions": [[],[]],
           "max_spawn_number": "",
 
-          "genetic": {
-            "mutation_rate": "",
-            "crossover_rate": ""
-          }
+          "mutation_rate": "",
+          "crossover_rate": ""
         }
 
       },
 
       "community": {
-        "is_enabled": "IS_MODULE_ENABLED",
-
         "attached_offsets": [
           {"cell_type_name": "", "offset": ""}
         ],
