@@ -10,9 +10,10 @@ class GameActor:
         self._vector_position: Vector2 = Vector2(0, 0)
         self._vector_velocity: Vector2 = Vector2(0, 0)
         self._world_manager: WorldManager = None
-        self._object_state = "non_initiated"
+        self._object_state = const.NON_VALUE
+        self._local_timer = pygame.time.Clock()
         
-    def init(self):
+    def init(self, transfer_object: dict):
         pass
         
     def set_position(self, new_pos: Vector2):
@@ -97,4 +98,4 @@ class GameActor:
         self._world_manager.spawn(cells)
         
     def console_print(self):
-        pass
+        print(f"ACTOR - pos: {self._vector_position}, vel: {self._vector_velocity}")

@@ -1,5 +1,3 @@
-from CellWorld.MainActors.Entities.game_actor_class import GameActor
-from CellWorld.MainActors.Entities.game_cell_class import CellType
 from CellWorld.MainActors.Entities.game_world_manager import WorldManager
 from CellWorld.Tools.JsonSituationParser.json_parser import JsonParser
 import CellWorld.Tools.Logger.loggers as lg
@@ -27,6 +25,7 @@ class WorldSerializer:
             _logger.critical(f"No data segment - {key}")
             
         _logger.critical(f"World serialized!")
+        return result_world_manager
     
     def __serialize_global_options(segment: dict, world_manager: WorldManager):
         return world_manager.change_world_options(segment)

@@ -11,7 +11,7 @@ _logger = lg.get_module_logger("CELLTYPE")
 class CellType(GameActor):
     
     def __init__(self) -> None:
-        self.name: str = "init_value_name"
+        self.name: str = const.NON_VALUE
         self.color: tuple = const.MISSED_COLOR
         self.size: int = const.MISSED_SIZE
         
@@ -143,3 +143,15 @@ class CellType(GameActor):
         
     def console_print(self):
         _logger.warning(f"TYPE: {self.name}, HUNG: {self._float_hunger}, TIMER: {self.local_timer}, STATUS: {self._object_state}")
+        
+    def initiate_update(self, cells):
+        
+        
+    def mutate(self, mutation_rate: float, mutation_chance: float):
+        if random.uniform(0, mutation_chance):
+            self.name = hashlib.md5(str(random.random()).encode()).hexdigest()
+            self.eatable_radius *= 1 - random.uniform(-mutation_rate, mutation_rate)
+            self.hunger_trigger_value *= 1 - random.uniform(-mutation_rate, mutation_rate)
+            self.metabolism *= 1 - random.uniform(-mutation_rate, mutation_rate)
+            self.speed_max *= 1 - random.uniform(-mutation_rate, mutation_rate)
+            self.strength *= 1 - random.uniform(-mutation_rate, mutation_rate)
