@@ -1,6 +1,7 @@
 from pygame import Vector2
 from CellWorld.MainActors.Entities.game_actor_class import GameActor
 from CellWorld.MainActors.Entities.game_cell_class import CellType
+import CellWorld.Constant.constants as const
 import random
 import hashlib
 
@@ -41,12 +42,22 @@ class CellGroup(GameActor):
     
     def initiate_spawn(self, global_manager):
         super().initiate_spawn(global_manager)
+        self.initiate_death()
         
     def initiate_spawner_ability(self):
         cells_to_spawn = []
-        for i in range(self.cell_count):
+        for _ in range(0, self.cell_count):
             random_cell: CellType = self.get_cell_with_name(random.choice(self.cells_names)).copy()
-            random_cell.set_position(self.random_vector(0, self.spawn_radius))
+            random_cell.set_position(self._vector_position)
+            random_cell.add_position(self.random_vector(0, self.spawn_radius))
             cells_to_spawn.append(random_cell)
         
-        self._world_manager.spawn(cells_to_spawn: list)
+        self.spawn_to_world(cells_to_spawn: list)
+    
+    def draw(self, surface):
+        pass
+    
+    def initiate_update(self, cells):
+        pass
+    
+    

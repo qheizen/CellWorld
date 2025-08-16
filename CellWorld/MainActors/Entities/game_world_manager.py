@@ -1,5 +1,6 @@
 import CellWorld.Tools.Logger.loggers as lg
 from CellWorld.MainActors.Entities.game_cell_class import CellType
+from CellWorld.MainActors.Entities.game_group_class import CellGroup
 
 _logger = lg.get_module_logger("WorldManager")
 
@@ -50,5 +51,11 @@ class WorldManager:
         if not cell in self._cell_types:
             self._cell_types.append(cell)
         
-    def add_cell_group(self, cell_group: dict):
-        
+    def add_cell_group(self, cell_group_data: dict):
+        if not cell_group_data:
+            _logger.error("Was received an empty cell_group")
+            return
+        cell_group: CellGroup = CellGroup()
+        cell_group.init(cell_group_data)
+        if not cell_group in self._cell_groups:
+            self._cell_groups.append(cell_group)

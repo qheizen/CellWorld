@@ -1,6 +1,7 @@
 from pygame import Vector2
 import pygame
 from CellWorld.MainActors.Entities.game_world_manager import WorldManager
+import CellWorld.Constant.constants as const
 import random
 
 class GameActor:
@@ -40,7 +41,7 @@ class GameActor:
         except (TypeError, ValueError):
             return Vector2(0, 0)
     
-    def random_vector(self, start = -100, final = 100) -> Vector2:
+    def random_vector(self, start = const.RAN_START, final = const.RAN_END) -> Vector2:
         start_point = self.safe_vector2_convert(start)
         final_point = self.safe_vector2_convert(final)
         return Vector2(random.uniform(start_point.x, final_point.x), 
@@ -81,13 +82,19 @@ class GameActor:
         self.set_velocity(0)
         
     def draw(self, surface):
-        pygame.draw.circle(surface, (255,0,255), (int(self._vector_position.x), int(self._vector_position.y)), 4)
+        pygame.draw.circle(surface, const.MISSED_COLOR, (int(self._vector_position.x), int(self._vector_position.y)), const.MISSED_SIZE)
     
     def get_cell_with_name(self, name: str):
         return self._world_manager.get_cell_type(name)
     
-    def initiate_update(self):
+    def initiate_update(self, cells):
         pass
     
     def initiate_spawner_ability(self):
+        pass
+    
+    def spawn_to_world(self, cells: list):
+        self._world_manager.spawn(cells)
+        
+    def console_print(self):
         pass

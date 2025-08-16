@@ -43,7 +43,7 @@ class CellType(GameActor):
         self.friendship: list = []
         self.actions: list = []
     
-        self._float_hunger: float = float(random.randint(1,300))
+        self._float_hunger: float = float(random.randint(1,const.MISSED_HUNGER))
         self._attached_to: CellType = None
         self._hunting_at: CellType = None
         
@@ -136,7 +136,10 @@ class CellType(GameActor):
         
     def initiate_spawn(self, global_manager):
         super().initiate_spawn(global_manager)
-        self._float_hunger = float(random.randint(1, 100))
+        self._float_hunger = float(random.randint(1, const.MISSED_HUNGER))
         
     def draw(self, surface):
         pygame.draw.circle(surface, self.color, (int(self._vector_position.x), int(self._vector_position.y)), self.size)
+        
+    def console_print(self):
+        _logger.warning(f"TYPE: {self.name}, HUNG: {self._float_hunger}, TIMER: {self.local_timer}, STATUS: {self._object_state}")
