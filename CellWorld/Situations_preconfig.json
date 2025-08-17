@@ -1,79 +1,79 @@
 {
   "global_options": {
     "credentials": {
-      "fps_lock": "target fps counter",
-      "window_size": ["window_x", "window_y"],
-      "background_color": []
+      "fps_lock": 60,
+      "window_size": [1920, 1080],
+      "background_color": [0, 0, 40]
     },
     "physical": {
-      "wall_margin": "wall_margin",
-      "wall_strength": "wall_strength",
-      "constant_g": "GLOBAL_G_CONSTANT"
+      "wall_margin": 200,
+      "wall_strength": 100,
+      "constant_g": 1
     }
   },
 
   "cell_options": [
     {
       "credentials": {
-        "name": "cell_name",
-        "color": "cell_color",
-        "start_pos": "start_pos",
-        "start_vel": "start_vel",
-        "size": "size"
+        "name": "namev",
+        "color": [111, 111, 111],
+        "start_pos": [40.0,40.0],
+        "start_vel": [0.0,0.0],
+        "visual_distance": 300,
+        "size": 6
       },
       
       "physical": {
-        "cell_mass": "cell_mass",
-        "cell_min_speed": "cell_min_speed",
-        "cell_max_speed": "cell_max_speed",
-        "strength": "cell_strength",
+        "cell_mass": 2.0,
+        "cell_min_speed": 0.0,
+        "cell_max_speed": 1.0,
+        "strength": 0.7,
         
-        "is_movable": "is_cell_movable",
-        "is_gravitate": "is_cell_attracted_by_physic"
+        "is_movable": true,
+        "is_gravitate": true
       },
 
       "life": {
-        "metabolism_rate": "METABOLISM_IN_SECOND",
-        "hunger_border": "hunger_mode_coef",
+        "metabolism_rate": 1.4,
+        "hunger_border": 50,
 
-        "eat_radius": "eating_radius",
-        "lifetime": "how_much_time_cell_can_live",
+        "eat_radius": 12,
+        "lifetime": 4000,
 
-        "is_mortal": "can_cell_die",
-        "is_can_be_hungered": "cell_hunger_mode_flag",
+        "is_mortal": false,
+        "is_can_be_hungered": false,
         "food": [
-          {"cell_type_name": "", "stats_multiplier": ""}
+          {"cell_type_name": "namev", "stats_multiplier": 2}
         ],
 
         "spawner": {
-          "spawn_cell_types": [],
-          "spawned_start_speed": "",
-          "spawn_delay": "",
-          "spawn_directions": [[],[]],
-          "max_spawn_number": "",
+          "spawn_cell_types": ["namev"],
+          "spawned_start_speed": [3,3],
+          "spawn_delay": 3,
+          "spawn_directions": [[3,3]],
+          "max_spawn_number": 5,
 
-          "mutation_rate": "",
-          "crossover_rate": ""
+          "mutation_rate": 0.2,
+          "crossover_rate": 0.2
         }
 
       },
 
       "community": {
         "attached_offsets": [
-          {"cell_type_name": "", "offset": ""}
+          {"cell_type_name": "namev", "offset": 30}
         ],
 
         "relationship": [
-          {"cell_type_name": "", "relation": "", "preferred_distance": "", "hunger_distance": ""}
+          {"cell_type_name": "namev", "relation": -400, "preferred_distance": 15, "hunger_distance": 10}
         ],
 
         "friendship": [
-          {"cell_type_name": "", "friend_distance": "", "is_line_need": ""}
+          {"cell_type_name": "namev", "friend_distance": 30, "is_line_need": true}
         ]
       },
 
       "actions": [
-        {"trigger_name_func": "", "event_name": ""}
       ]
     }
   ],
@@ -81,28 +81,14 @@
   "cell_groups": [
      {
       "credentials": {
-        "name": "",
-        "start_pos"
+        "name": "namevd",
+        "start_pos": [99,99]
       },
       "group": {
-        "cells_type_names": "",
-        "cell_count": "",
-        "spawn_radius": ""
+        "cells_type_names": ["namev"],
+        "cell_count": 40,
+        "spawn_radius": 30
       }
-    }
-  ],
-
-  "game_events": [
-     {
-      "credentials": {
-        "name": "",
-        "description": "",
-        "event_type": ""
-      },
-
-      "args": [],
-
-      "activation_time": ""
     }
   ]
 }

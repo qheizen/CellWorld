@@ -1,63 +1,69 @@
+import hashlib
+import random
+import copy
 from pygame import Vector2
+import CellWorld.Constant.constants as const
+from CellWorld.Tools.Logger.loggers import get_module_logger
 from CellWorld.MainActors.Entities.game_actor_class import GameActor
 from CellWorld.MainActors.Entities.game_cell_class import CellType
-import CellWorld.Constant.constants as const
-import random
-import hashlib
+
+_logger = get_module_logger("CELLGROUP")
 
 class CellGroup(GameActor):
-    
+
     def __init__(self):
-        self.name = "non-init-value"
-        self.cells_names: list = []
-        self.cell_count: int = 0
-        self.spawn_radius: float = 0.
-        
+        super().__init__()
+        self.name = const.NON_VALUE
+        self.cells_names = []
+        self.cell_count = 0
+        self.spawn_radius = 0.0
+
     def init(self, transfer_object: dict):
-        options_tags: dict = {
+        options_tags = {
             "credentials": self.__safe_init_credentials,
-            "group": self.__safe_init_group,
+            "group": self.__safe_init_group
         }
-        
-        for tag, values in transfer_object:
-            if init_func := options_tags[tag]:
+
+        for tag, values in transfer_object.items():
+            init_func = options_tags.get(tag)
+            if init_func:
                 init_func(values)
-    
-    def __safe_init_group(self, values):
+
+    def __safe_init_group(self, values: dict):
         link_dict = {
             "cells_type_names": "cells_names",
             "cell_count": "cell_count",
             "spawn_radius": "spawn_radius"
         }
-        for key, value in values:
-            if attr := link_dict[key]:
+        for key, value in values.items():
+            attr = link_dict.get(key)
+            if attr:
                 setattr(self, attr, value)
-        
-    def __safe_init_credentials(self, credentials):
-        if not (name := credentials.get("name")):
+
+    def __safe_init_credentials(self, credentials: dict):
+        name = credentials.pop("name", None)
+        if not name:
             name = hashlib.md5(str(random.random()).encode()).hexdigest()
-            credentials.pop("name")
         self.name = name
-        self.set_position(credentials.get("start_pos", Vector2(0,0)))
-    
+        self.set_position(credentials.get("start_pos", Vector2(0, 0)))
+
     def initiate_spawn(self, global_manager):
         super().initiate_spawn(global_manager)
         self.initiate_death()
-        
+
     def initiate_spawner_ability(self):
         cells_to_spawn = []
-        for _ in range(0, self.cell_count):
-            random_cell: CellType = self.get_cell_with_name(random.choice(self.cells_names)).copy()
-            random_cell.set_position(self._vector_position)
-            random_cell.add_position(self.random_vector(0, self.spawn_radius))
-            cells_to_spawn.append(random_cell)
-        
-        self.spawn_to_world(cells_to_spawn: list)
-    
-    def draw(self, surface):
-        pass
-    
+        for _ in range(self.cell_count):
+            prototype = self.get_cell_with_name(random.choice(self.cells_names))
+            if not prototype:
+                continue
+            new_cell = copy.deepcopy(prototype)
+            new_cell.set_position(self._vector_position)
+            new_cell.add_position(self.random_vector(0, self.spawn_radius))
+            cells_to_spawn.append(new_cell)
+            
+        if cells_to_spawn:
+            self.spawn_to_world(cells_to_spawn)
+
     def initiate_update(self, cells):
-        pass
-    
-    
+        pass 

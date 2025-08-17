@@ -9,29 +9,14 @@ class CustomFormatter(logging.Formatter):
     green = "\x1b[1;32m"
 
     format_info = "{COLOR}%(levelname)s{RESET} - %(message)s"
-    format_other = "{COLOR}%(levelname)s{RESET} - %(message)s (%(filename)s:%(lineno)d)"
+    format_other = "{COLOR}%(levelname)s{RESET} - %(message)s"
 
     FORMATS = {
-        logging.DEBUG: format_other.format(
-            COLOR=purple,
-            RESET=reset,
-        ),
-        logging.INFO: format_info.format(
-            COLOR=green,
-            RESET=reset,
-        ),
-        logging.WARNING: format_other.format(
-            COLOR=yellow,
-            RESET=reset,
-        ),
-        logging.ERROR: format_other.format(
-            COLOR=red,
-            RESET=reset,
-        ),
-        logging.CRITICAL: format_other.format(
-            COLOR=red,
-            RESET=reset,
-        ),
+        logging.DEBUG: format_other.format(COLOR=purple, RESET=reset),
+        logging.INFO: format_info.format(COLOR=green, RESET=reset),
+        logging.WARNING: format_other.format(COLOR=yellow, RESET=reset),
+        logging.ERROR: format_other.format(COLOR=red, RESET=reset),
+        logging.CRITICAL: format_other.format(COLOR=red, RESET=reset),
     }
 
     def format(self, record):
@@ -41,12 +26,13 @@ class CustomFormatter(logging.Formatter):
 
 def get_module_logger(mod_name=''):
     """
-    To use this, do logger = get_module_logger(__name__)
+    To use: logger = get_module_logger(__name__)
     """
     logger = logging.getLogger(mod_name)
-    handler = logging.StreamHandler()
-    formatter = CustomFormatter()
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        formatter = CustomFormatter()
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
     return logger
