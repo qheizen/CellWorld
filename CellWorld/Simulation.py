@@ -48,7 +48,7 @@ class Simulation:
                 print("No cell prototype available to spawn (game_manager._cell_types is empty).")
             else:
                 new_cells = []
-                for i in range(15):
+                for i in range(70):
                     self.spawn(prototype)
         except Exception as e:
             print(f"Error while spawning initial cells: {e}")

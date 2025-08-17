@@ -146,7 +146,12 @@ class CellType(GameActor):
         self.__safe_setter(link_dict, spawner)
 
     def initiate_spawn(self, global_manager):
-        self._vector_position = Vector2(0,0)
+        super().initiate_spawn(global_manager)
+        self._float_hunger = float(random.randint(1, const.MISSED_HUNGER))
+        self._last_spawn_time = 0.0
+    
+    def initiate_spawn_at_point(self, global_manager, cords):
+        self._vector_position = self.safe_vector2_convert(cords)
         super().initiate_spawn(global_manager)
         self._float_hunger = float(random.randint(1, const.MISSED_HUNGER))
         self._last_spawn_time = 0.0
@@ -289,7 +294,7 @@ class CellType(GameActor):
         
         for cell_type in self.food:
             if other.name == cell_type["cell_type_name"] and other not in self._attached_to:
-                if not self._hunting_at:
+                if not self._hunting_at or dist <= (self._vector_position - self._hunting_at._vector_position).length():
                     self._hunting_at = other
                     
                 if dist <= self.eatable_radius:
@@ -308,10 +313,10 @@ class CellType(GameActor):
         if self.is_can_be_hungered:
             self._float_hunger -= self.metabolism / self.get_fps()
         
-        if self._float_hunger <= self.hunger_trigger_value:
-            self._hungerred = True
-        else:
-            self._hungerred = False
+            if self._float_hunger <= self.hunger_trigger_value:
+                self._hungerred = True
+            else:
+                self._hungerred = False
         return
 
     def _check_death(self):

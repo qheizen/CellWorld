@@ -91,7 +91,6 @@ class GameActor:
         self._world_manager = global_manager
         if self._vector_position == Vector2(0, 0):
             self.set_position(self.get_random_in_screen_vector())
-            print(self._vector_position)
 
     def initiate_death(self):
         self._object_state = "death"

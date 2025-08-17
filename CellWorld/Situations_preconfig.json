@@ -69,7 +69,7 @@
         ],
 
         "friendship": [
-          {"cell_type_name": "namev", "friend_distance": 30, "is_line_need": true}
+          {"cell_type_name": "namev", "friend_distance": 30, "is_line_need": false}
         ]
       },
 
