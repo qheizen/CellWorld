@@ -25,9 +25,6 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 def get_module_logger(mod_name=''):
-    """
-    To use: logger = get_module_logger(__name__)
-    """
     logger = logging.getLogger(mod_name)
     if not logger.handlers:
         handler = logging.StreamHandler()

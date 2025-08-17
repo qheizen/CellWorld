@@ -54,7 +54,6 @@ class Simulation:
             print(f"Error while spawning initial cells: {e}")
 
     def getClock(self):
-        # Return the elapsed milliseconds
         return pygame.time.get_ticks()
 
     def spawn(self, args):
