@@ -25,6 +25,7 @@ class CellType(GameActor):
         self.strength: float = 0.
         self.is_movable: bool = False
         self.is_gravitate: bool = False
+        self.drag: float = 0.12
         
         self.metabolism: float = 0.
         self.hunger_trigger_value: float = 0.
@@ -94,7 +95,7 @@ class CellType(GameActor):
         if not name:
             name = hashlib.md5(str(random.random()).encode()).hexdigest()
         self.name = name
-        self.set_position(credentials.get("start_pos", Vector2(0, 0)))
+        self.set_position(Vector2(0,0))
         self.set_velocity(credentials.get("start_vel", self.random_vector()))
         self.__safe_setter(link_dict, credentials)
 
@@ -105,7 +106,8 @@ class CellType(GameActor):
             "cell_max_speed": "speed_max",
             "strength": "strength",
             "is_movable": "is_movable",
-            "is_gravitate": "is_gravitate"
+            "is_gravitate": "is_gravitate",
+            "drag":"drag"
         }
         self.__safe_setter(link_dict, physical)
 
@@ -186,7 +188,7 @@ class CellType(GameActor):
                 continue
             
             vector_to_other = other._vector_position - self._vector_position
-            if vector_to_other.length() >= self.visual_distance:
+            if vector_to_other.length() >= self.visual_distance or vector_to_other.length() < const.OVERLAP:
                 continue
             result_force += self._gravitaion_move(other, vector_to_other)
 
@@ -226,6 +228,8 @@ class CellType(GameActor):
         
         vel = self._vector_velocity
         speed = vel.length()
+        drag_multiplier = random.uniform(1-self.drag, 1+self.drag)
+        added_force *= drag_multiplier
         
         if speed < self.speed_max:
             self.add_velocity(added_force / self.get_fps())
@@ -265,10 +269,10 @@ class CellType(GameActor):
                 if self._hungerred == False:
                     force_to_return += unit * self.strength * cell_type["relation"] / dist
                 else:
-                    force_to_return += unit * self.strength * abs(cell_type["relation"]) / dist
+                    force_to_return += unit * self.strength * abs(cell_type["relation"])
 
                 distance_key = "preferred_distance" if self._hungerred else "hunger_distance"
-                if other == self._hunting_at:
+                if other == self._hunting_at and self._hungerred == True:
                     continue
                 if dist > cell_type[distance_key]:
                     force_to_return += unit * self.strength / dist
@@ -305,6 +309,7 @@ class CellType(GameActor):
     
     def attach_to(self, other):
         other._attached_to.append(self)
+        self.initiate_death()
 
     def _metabolize(self): 
         if self._object_state != "alive":
@@ -408,17 +413,14 @@ class CellType(GameActor):
         new.attached_offset = copy.deepcopy(self.attached_offset)
         new.friendship = copy.deepcopy(self.friendship)
         new.actions = copy.deepcopy(self.actions)
-
-        # Internal state: reset runtime-specific fields
         new._float_hunger = float(random.randint(1, const.MISSED_HUNGER))
         new._attached_to = [] 
         new._hunting_at = None
         new.local_timer = 0.0
         new._last_spawn_time = 0.0
 
-        # Note: do NOT copy _local_timer (pygame Clock) or _world_manager reference
-        new._vector_position = Vector2(0, 0)
-        new._vector_velocity = Vector2(0, 0)
+        new._vector_position = copy.deepcopy(self._vector_position)
+        new._vector_velocity = copy.deepcopy(self._vector_velocity)
         new._object_state = const.NON_VALUE
 
         return new

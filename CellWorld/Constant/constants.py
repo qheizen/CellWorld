@@ -8,7 +8,7 @@ RAN_END = 100
 
 WINDOW_SIZE = [1920, 1080]
 FPS = 60
-
+OVERLAP = 0.001
 NON_VALUE = "non-init-value"
 
 VISIBLE_RADIUS = 200

@@ -102,5 +102,13 @@ class WorldManager:
     def get_cell_type(self, name: str):
         for item in self._cell_types:
             if item.name == name:
+                _logger.info(f"Trying to take cell_type example (name: {name})")
+                return item
+        return None
+    
+    def get_cell_group(self, name: str):
+        for item in self._cell_groups:
+            if item.name == name:
+                _logger.info(f"Trying to take cell_group example (name: {name})")
                 return item
         return None

@@ -24,10 +24,11 @@
       },
       
       "physical": {
-        "cell_mass": 2.0,
+        "cell_mass": 30.0,
         "cell_min_speed": 0.0,
         "cell_max_speed": 1.0,
         "strength": 0.7,
+        "random_drag": 0.12,
         
         "is_movable": true,
         "is_gravitate": true
@@ -65,7 +66,7 @@
         ],
 
         "relationship": [
-          {"cell_type_name": "namev", "relation": -400, "preferred_distance": 15, "hunger_distance": 10}
+          {"cell_type_name": "namev", "relation": -40, "preferred_distance": 15, "hunger_distance": 10}
         ],
 
         "friendship": [
@@ -86,8 +87,8 @@
       },
       "group": {
         "cells_type_names": ["namev"],
-        "cell_count": 40,
-        "spawn_radius": 30
+        "cell_count": 10,
+        "spawn_radius": 10.0
       }
     }
   ]
