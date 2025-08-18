@@ -24,7 +24,7 @@ class Simulation:
 
     def init_game_window(self):
         serializer = sr.WorldSerializer()
-        self.game_manager = serializer.serialize_world("CellWorld/ROFL.json")
+        self.game_manager = serializer.serialize_world("CellWorld/Situations_preconfig.json")
         self.game_manager.set_simulation_manager(self)
 
         windows_size = self.game_manager.get_option("size")
@@ -39,15 +39,9 @@ class Simulation:
 
     def init_spawn(self):
         try:
-            namev = self.game_manager.get_cell_type("neutral")
-            namev1 = self.game_manager.get_cell_type("agressor")
-            namev2 = self.game_manager.get_cell_type("swarm")
-            
-            if namev is None:
-                print("No cell prototype available to spawn (game_manager._cell_types is empty).")
-            else:
-                for i in range(80):
-                    self.spawn(random.choice(self.game_manager._cell_types))
+            planet = self.game_manager.get_cell_type("namev")
+            for i in range(20):
+                self.spawn(planet)
         except Exception as e:
             print(f"Error while spawning initial cells: {e}")
             

@@ -60,7 +60,7 @@
           {"cell_type_name": "neutral", "offset": 30}
         ],
         "relationship": [
-          {"cell_type_name": "neutral", "relation": -40, "preferred_distance": 15, "hunger_distance": 15}
+          {"cell_type_name": "neutral", "relation": -40, "preferred_distance": 15, "hunger_distance": 10}
         ],
         "friendship": [
           {"cell_type_name": "neutral", "friend_distance": 30, "is_line_need": false}
@@ -115,7 +115,7 @@
       "community": {
         "attached_offsets": [],
         "relationship": [
-          {"cell_type_name": "neutral", "relation": -80, "preferred_distance": 15, "hunger_distance": 15}
+          {"cell_type_name": "neutral", "relation": -80, "preferred_distance": 10, "hunger_distance": 5}
         ],
         "friendship": []
       },
@@ -136,7 +136,7 @@
       "physical": {
         "cell_mass": 15.0,
         "cell_min_speed": 0.1,
-        "cell_max_speed": 1,
+        "cell_max_speed": 1.5,
         "strength": 0.5,
         "random_drag": 0.2,
         "is_movable": true,
@@ -170,10 +170,10 @@
           {"cell_type_name": "swarm", "offset": 15}
         ],
         "relationship": [
-          {"cell_type_name": "swarm", "relation": 20, "preferred_distance": 15, "hunger_distance": 15}
+          {"cell_type_name": "swarm", "relation": 20, "preferred_distance": 10, "hunger_distance": 5}
         ],
         "friendship": [
-          {"cell_type_name": "swarm", "friend_distance": 25, "is_line_need": true}
+          {"cell_type_name": "swarm", "friend_distance": 25, "is_line_need": false}
         ]
       },
 
@@ -199,7 +199,7 @@
         "start_pos": [99,99]
       },
       "group": {
-        "cells_type_names": ["agressor"],
+        "cells_type_names": ["swarm"],
         "cell_count": 5,
         "spawn_radius": 10.0
       }
@@ -210,7 +210,7 @@
         "start_pos": [99,99]
       },
       "group": {
-        "cells_type_names": ["neutral"],
+        "cells_type_names": ["swarm"],
         "cell_count": 5,
         "spawn_radius": 10.0
       }

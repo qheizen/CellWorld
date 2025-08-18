@@ -64,7 +64,6 @@ class CellType(GameActor):
             "life": self.__safe_init_life,
             "community": self.__safe_init_community,
             "actions": self.__safe_init_actions,
-            "spawner": self.__safe_init_spawner
         }
 
         for tag, values in transfer_object.items():
@@ -122,6 +121,8 @@ class CellType(GameActor):
             "food": "food"
         }
         self.__safe_setter(link_dict, life)
+        if spawner := life["spawner"]:
+            self.__safe_init_spawner(spawner)
 
     def __safe_init_community(self, community: dict) -> None:
         link_dict = {
@@ -182,21 +183,26 @@ class CellType(GameActor):
         )
 
     def update(self, current_cells: list):
-        result_force = Vector2(0,0)
+        result_force = Vector2(0, 0)
         for other in current_cells:
             if other is self or not isinstance(other, CellType) or not self.is_movable:
                 continue
-            
-            vector_to_other = other._vector_position - self._vector_position
-            if vector_to_other.length() >= self.visual_distance or vector_to_other.length() < const.OVERLAP:
-                continue
-            result_force += self._gravitaion_move(other, vector_to_other)
 
-            if self._object_state != "alive":
-                continue            
-            result_force += self._relationships_move(other, vector_to_other)
+            vector_to_other = other._vector_position - self._vector_position
+            dist = vector_to_other.length()
+            if dist >= self.visual_distance or dist < const.OVERLAP:
+                continue
+
+            if self._object_state == "alive":
+                result_force += self._relationships_move(other, vector_to_other)
+
+            grav_force = self._gravitaion_move(other, vector_to_other)
+            if self._hungerred:
+                grav_force *= 0.1
+            result_force += grav_force
+
         result_force += self._inscreen_force()
-        
+
         self._metabolize()
         self._handle_spawning()
         self._check_death()
@@ -224,44 +230,60 @@ class CellType(GameActor):
         
     def _add_movable(self, added_force) -> Vector2:
         if not self.is_movable:
-            return Vector2(0,0)
-        
+            return Vector2(0, 0)
+
         vel = self._vector_velocity
         speed = vel.length()
-        drag_multiplier = random.uniform(1-self.drag, 1+self.drag)
+        if self._hungerred:
+            speed_max = self.speed_max * 2.0 
+            drag_factor = 0.95
+        else:
+            speed_max = self.speed_max
+            drag_factor = 0.9
+
+        drag_multiplier = random.uniform(1 - self.drag, 1 + self.drag)
         added_force *= drag_multiplier
-        
-        if speed < self.speed_max:
+
+        if speed < speed_max:
             self.add_velocity(added_force / self.get_fps())
-            
-        self._vector_velocity *= 0.9
-            
+
+        self._vector_velocity *= drag_factor
+
         if speed < self.speed_min:
-            self.add_velocity(self.speed_min)
+            self.add_velocity(self.speed_min / self.get_fps())
+
         self.add_position(self._vector_velocity)
+        return self._vector_velocity
 
     def _gravitaion_move(self, other: CellType, vector_to_other) -> Vector2:
         if not self.is_gravitate:
-            return Vector2(0,0)
-        
-        g = self.get_constants().get("g", 0.0)
+            return Vector2(0, 0)
 
-        distance_sq = vector_to_other.length_squared()
+        g = self.get_constants().get("g", 0.0)
+        distance_sq = max(vector_to_other.length_squared(), const.SAFE_DIST)
         if distance_sq <= 0:
-            return Vector2(0,0)
+            return Vector2(0, 0)
+
         try:
             force_dir = vector_to_other.normalize()
         except Exception:
-            return Vector2(0,0)
+            return Vector2(0, 0)
+
         acceleration = g * other.mass / distance_sq
-        return (force_dir * acceleration)
+        return force_dir * acceleration
     
     def _relationships_move(self, other: CellType, vector_to_other:Vector2) -> Vector2:
         force_to_return = Vector2(0,0)
+        dist = max(vector_to_other.length(), const.SAFE_DIST)
+        for cell_type in self.friendship:
+            if other.name == cell_type["cell_type_name"]:
+                if dist < cell_type["friend_distance"] and cell_type["is_line_need"]:
+                    self._friendly_cells.append(other._vector_position)  
+                    
         if not self.relationship:
             return force_to_return
         
-        dist = vector_to_other.length()
+        
         unit = vector_to_other / dist
         
         for cell_type in self.relationship:
@@ -278,11 +300,7 @@ class CellType(GameActor):
                     force_to_return += unit * self.strength / dist
                 elif dist < cell_type[distance_key]:
                     force_to_return -= unit * self.strength
-            
-        for cell_type in self.friendship:
-            if other.name == cell_type["cell_type_name"]:
-                if dist > cell_type["friend_distance"] and cell_type["is_line_need"]:
-                    self._friendly_cells.append(other._vector_position)  
+
                     
         for cell_type in self.attached_offset:
             if other.name == cell_type["cell_type_name"] and other in self._attached_to:
@@ -335,13 +353,14 @@ class CellType(GameActor):
     def _handle_spawning(self):
         if not self.spawn_cell_names or self.spawn_left_count <= 0 or not self._world_manager:
             return
-
         if self.spawn_delay <= 0 and self._last_spawn_time == 0.0:
             self._spawn_cell()
             return
 
         if self.local_timer >= self._last_spawn_time + self.spawn_delay:
             self._spawn_cell()
+            
+        self.local_timer += 1 / self.get_fps()
 
     def _spawn_cell(self):
         
@@ -363,7 +382,7 @@ class CellType(GameActor):
         else:
             new_cell.add_position(self.random_vector(-1, 1))
         new_cell.set_velocity(self.spawn_start_speed)
-        new_cell.mutate(self.spawn_mutation_rate, self.spawn_mutation_chance)
+        # new_cell.mutate(self.spawn_mutation_rate, self.spawn_mutation_chance)
         self.spawn_to_world([new_cell])
         self.spawn_left_count -= 1
         self._last_spawn_time = self.local_timer
@@ -402,7 +421,7 @@ class CellType(GameActor):
         # Copy lists/structures safely
         new.food = copy.deepcopy(self.food)
         new.spawn_cell_names = list(self.spawn_cell_names)
-        new.spawn_start_speed = Vector2(self.spawn_start_speed.x, self.spawn_start_speed.y)
+        new.spawn_start_speed = Vector2(self.spawn_start_speed[0], self.spawn_start_speed[1])
         new.spawn_delay = int(self.spawn_delay)
         new.spawn_left_count = int(self.spawn_left_count)
         new.spawn_directions = copy.deepcopy(self.spawn_directions)
