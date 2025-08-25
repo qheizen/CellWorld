@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d13bb5f-aeaa-4553-a5a2-32a39c23f1f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Tools/Entities/world_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Tools/Entities/world_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/json_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Tools/JsonSituationParser/json_parser.py" afterDir="false" />
-    </list>
+    <list default="true" id="5d13bb5f-aeaa-4553-a5a2-32a39c23f1f4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -69,8 +69,6 @@ class CellGroup(GameActor):
         
         self.spawn_to_world(cells_to_spawn)
 
-        
-
     def initiate_update(self, cells):
         pass 
 

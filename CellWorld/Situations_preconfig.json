@@ -3,12 +3,15 @@
     "credentials": {
       "fps_lock": 60,
       "window_size": [1920, 1080],
-      "background_color": [0, 0, 40]
+      "background_color": [0, 0, 40],
+      "debug_draw": true
     },
     "physical": {
       "wall_margin": 200,
       "wall_strength": 100,
-      "constant_g": 1
+      "constants": {
+        "g": 1
+      }
     }
   },
 
@@ -17,10 +20,11 @@
       "credentials": {
         "name": "namev",
         "color": [111, 111, 111],
-        "start_pos": [40.0,40.0],
-        "start_vel": [0.0,0.0],
         "visual_distance": 300,
-        "size": 6
+        "size": 6,
+        "draw_text_table": false,
+        "draw_lines": false,
+        "death_color": [100, 100, 100]
       },
       
       "physical": {
@@ -28,7 +32,7 @@
         "cell_min_speed": 0.0,
         "cell_max_speed": 1.0,
         "strength": 0.7,
-        "random_drag": 0.12,
+        "drag_factor": 0.12,
         
         "is_movable": true,
         "is_gravitate": true
@@ -42,22 +46,21 @@
         "lifetime": 4000,
 
         "is_mortal": false,
-        "is_can_be_hungered": false,
+        "is_metabolism": false,
         "food": [
           {"cell_type_name": "namev", "stats_multiplier": 2}
-        ],
+        ]
+      },
 
-        "spawner": {
-          "spawn_cell_types": ["namev"],
-          "spawned_start_speed": [3,3],
-          "spawn_delay": 3,
-          "spawn_directions": [[3,3]],
-          "max_spawn_number": 5,
+      "spawner": {
+        "spawn_cell_types": ["namev"],
+        "spawned_start_speed": [3,3],
+        "spawn_delay": 3,
+        "spawn_directions": [[3,3]],
+        "max_spawn_number": 5,
 
-          "mutation_rate": 0.2,
-          "crossover_rate": 0.2
-        }
-
+        "mutation_rate": 0.2,
+        "crossover_rate": 0.2
       },
 
       "community": {
