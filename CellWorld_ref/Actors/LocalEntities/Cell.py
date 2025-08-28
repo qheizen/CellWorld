@@ -23,24 +23,24 @@ class Cell(actor.Actor):
         
         self.is_gravitate: bool = False
         self._mass: float = const.TEMPLATE_MASS
-        self._speed_min: float = 0.
+        self._speed_min: float = 0.0
         self._speed_max: float = const.TEMPLATE_SPEED
-        self._strength: float = 0.
+        self._strength: float = 0.0
         
         self.is_metabolism: bool = False
-        self._metabolism: float = 0.
-        self._hunger_trigger: float = 0.
-        self._hunt_radius: float = 0.
-        self._lifetime: float = 0.
+        self._metabolism: float = 0.0
+        self._hunger_trigger: float = 0.0
+        self._hunt_radius: float = 0.0
+        self._lifetime: float = 0.0
         self._food: list = []
         
         self._spawn_cell_names: list = []
         self._spawn_start_speed: Vector2 = Vector2(0, 0)
-        self._spawn_delay: float = 0.
+        self._spawn_delay: float = 0.0
         self._spawn_left: int = 0
         self._spawn_directions: list = []
-        self._spawn_mutation_rate: float = 0.
-        self._spawn_mutation_chance: float = 0.
+        self._spawn_mutation_rate: float = 0.0
+        self._spawn_mutation_chance: float = 0.0
         
         self._relationship: list = []
         self._attached_offsets: list = []
@@ -48,7 +48,7 @@ class Cell(actor.Actor):
         
         self._actions: list = []
         
-        self._hunger: float = 0.
+        self._hunger: float = 0.0
         self._attached_to: Cell = None
         self._hunting_at: Cell = None
         self._is_hungerred: bool = False
@@ -145,7 +145,7 @@ class Cell(actor.Actor):
                                 (int(self._hunting_at._vec_position.x), int(self._hunting_at._vec_position.y)))
         
         if self._draw_text_table:
-            text_to_draw = f"name: {self._name}\nhunger: {self._hunger:.2f}\ntimer: {self._local_timer:.2f}"
+            text_to_draw = f"name: {self._name} hunger: {self._hunger:.2f} timer: {self._local_timer:.2f}"
             static.draw_text_table(surface, text_to_draw, self._vec_position.x, self._vec_position.y, const.COLORS["gray"])
             
     def console_print(self):
@@ -156,7 +156,7 @@ class Cell(actor.Actor):
         )
         
     def update(self, other_cells: list) -> None:
-        if self._hunting_at._object_state != gconst.OBJECT_STATES["alive"] or not self._is_hungerred:
+        if (self._hunting_at and self._hunting_at._object_state != gconst.OBJECT_STATES["alive"]) or not self._is_hungerred:
             self._hunting_at = None
         
         self._metabolize_tick()
@@ -171,10 +171,10 @@ class Cell(actor.Actor):
             if dist >= self.visual_distance or dist < const.OVERLAP_DIST:
                 continue
             
-            result_force += self._gravitaion_tick(other, vec_to_other)
+            result_force += self._gravitation_tick(other, vec_to_other)
             result_force += self._relationship_tick(other, vec_to_other)
         
-        result_force += self._attaching_tick(vec_to_other)
+        result_force += self._attaching_tick()
         result_force += self._inscreen_tick()
         self._handle_spawning()
         self._check_death()
@@ -194,11 +194,11 @@ class Cell(actor.Actor):
         if speed < speed_max:
             self.add_velocity(res_force / self._get_fps())
         
-        self._vec_velocity * self._drag_factor
         if speed < self._speed_min:
             self.add_velocity(self._speed_min / self._get_fps())
             
-        self.add_position(self._vec_velocity)
+        self.add_position(self._vec_velocity / self._get_fps())
+        self._vec_velocity *= self._drag_factor
         return
 
     def _handle_spawning(self):
@@ -237,7 +237,7 @@ class Cell(actor.Actor):
         new_cell.set_velocity(static.convert_to_vec(self._spawn_start_speed))
         
         self._spawn_to_world([new_cell])
-        self.spawn_left_count -= 1
+        self._spawn_left -= 1
         self._last_spawn_time = self._local_timer
     
     def _check_death(self):
@@ -267,7 +267,7 @@ class Cell(actor.Actor):
             fy = -strength / max(window_size[1] - self._vec_position.y, 1) 
         return Vector2(fx, fy)
     
-    def _gravitaion_tick(self, other: "Cell", vec_to_other: Vector2) -> Vector2:
+    def _gravitation_tick(self, other: "Cell", vec_to_other: Vector2) -> Vector2:
         if not self.is_gravitate:
             return Vector2(0, 0)
         
@@ -280,8 +280,8 @@ class Cell(actor.Actor):
             force_dir = vec_to_other.normalize()
         except Exception:
             return Vector2(0, 0)
+        acceleration = (g * other._mass) / distance_sq
         
-        acceleration = g * other._mass / distance_sq
         return force_dir * acceleration
         
 
@@ -292,24 +292,29 @@ class Cell(actor.Actor):
         self._hunger -= self._metabolism / self._get_fps()
         self._is_hungerred = (self._hunger <= self._hunger_trigger)
     
-    def _attaching_tick(self, vec_to_other: Vector2):
+    def _attaching_tick(self):
+        if not self._attached_to or self._attached_to._object_state == gconst.OBJECT_STATES["dead"]:
+            return Vector2(0, 0)
+        
+        vec_to_other = self._attached_to._vec_position - self._vec_position
         force_to_return = Vector2(0, 0)
         
         dist = vec_to_other.length()
         unit = vec_to_other / dist
-        
         if self._object_state == gconst.OBJECT_STATES["dead"] and self._attached_to:
-            attached_offset = self._attached_offsets.get(self._attached_to._name, 2)
-            if dist > attached_offset:
-                force_to_return += unit * self._strength
-            elif dist < attached_offset:
-                force_to_return -= unit * self._strength
+            for offset in self._attached_offsets:
+                if offset["cell_type_name"] == self._attached_to._name:
+                    attached_offset = offset.get("offset", 2)
+                    if dist > attached_offset:
+                        force_to_return += unit * self._strength
+                    elif dist < attached_offset:
+                        force_to_return -= unit * self._strength
 
         return force_to_return
             
     
     def _relationship_tick(self, other: "Cell", vec_to_other: Vector2) -> Vector2:
-        if self._object_state != gconst.OBJECT_STATES["alive"] and other._object_state != gconst.OBJECT_STATES["alive"]:
+        if self._object_state != gconst.OBJECT_STATES["alive"] or other._object_state != gconst.OBJECT_STATES["alive"]:
             return Vector2(0, 0)
         
         force_to_return = Vector2(0, 0)
@@ -411,3 +416,4 @@ class Cell(actor.Actor):
         if random.uniform(0, 1) >= self._spawn_mutation_chance:
             value *= random.uniform(1 - self._spawn_mutation_rate, 1 + self._spawn_mutation_rate)
             return value
+        return value

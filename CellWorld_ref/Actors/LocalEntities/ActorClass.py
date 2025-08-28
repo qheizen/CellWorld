@@ -1,7 +1,6 @@
 import CellWorld_ref.Constants.Constants as const
 import CellWorld_ref.Constants.InGameConst as gconst
 import CellWorld_ref.Tools.StaticLib as static
-import CellWorld_ref.Actors.GlobalEntities.GameManager as gm
 from pygame import Vector2
 import pygame
 
@@ -12,14 +11,14 @@ class Actor:
         self._name: str = static.get_random_hash()
         self._color: tuple = const.TEMPLATE_COL
         self._size: int = const.TEMPLATE_SIZE
-        self._draw_text_table: bool = False
-        self._draw_lines: bool = False
+        self._draw_text_table: bool = True
+        self._draw_lines: bool = True
         
         self._object_state: str = gconst.TEMPLATE_STATE
         self._vec_position = Vector2(0, 0)
         self._vec_velocity = Vector2(0, 0)
         
-        self._world_manager: gm.WorldManager = None
+        self._world_manager = None
         self._local_timer = 0.
         
     

@@ -10,7 +10,7 @@
       "wall_margin": 200,
       "wall_strength": 100,
       "constants": {
-        "g": 1
+        "g": 9.8
       }
     }
   },
@@ -20,19 +20,19 @@
       "credentials": {
         "name": "namev",
         "color": [111, 111, 111],
-        "visual_distance": 300,
+        "visual_distance": 40000,
         "size": 6,
-        "draw_text_table": false,
-        "draw_lines": false,
-        "death_color": [100, 100, 100]
+        "draw_text_table": true,
+        "draw_lines": true,
+        "death_color": [70, 70, 70]
       },
       
       "physical": {
-        "cell_mass": 30.0,
+        "cell_mass": 300.0,
         "cell_min_speed": 0.0,
-        "cell_max_speed": 1.0,
-        "strength": 0.7,
-        "drag_factor": 0.12,
+        "cell_max_speed": 10.0,
+        "strength": 2,
+        "drag_factor": 0.9,
         
         "is_movable": true,
         "is_gravitate": true
@@ -57,7 +57,7 @@
         "spawned_start_speed": [3,3],
         "spawn_delay": 3,
         "spawn_directions": [[3,3]],
-        "max_spawn_number": 5,
+        "max_spawn_number": 0,
 
         "mutation_rate": 0.2,
         "crossover_rate": 0.2
@@ -69,16 +69,16 @@
         ],
 
         "relationship": [
-          {"cell_type_name": "namev", "relation": -40, "preferred_distance": 15, "hunger_distance": 10}
+          {"cell_type_name": "namev", "relation": 0, "preferred_distance": 15, "hunger_distance": 10}
         ],
 
         "friendship": [
-          {"cell_type_name": "namev", "friend_distance": 30, "is_line_need": false}
+          {"cell_type_name": "namev", "friend_distance": 4000, "is_line_need": false}
         ]
       },
 
-      "actions": [
-      ]
+      "actions": {
+      }
     }
   ],
 

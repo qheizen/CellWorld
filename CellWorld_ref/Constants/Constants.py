@@ -4,15 +4,15 @@ COLORS: dict = {
     "red": (180, 0, 0),
     "rose": (255, 105, 180),
     "missed": (255, 0, 255),
-    "gray": (30, 30, 30)
+    "gray": (200, 200, 200)
 }
 
 WINSIZE = [480, 320]
 
-TEMPLATE_MASS = 1e6
-TEMPLATE_SIZE = 3
+TEMPLATE_MASS = 10.
+TEMPLATE_SIZE = 56
 TEMPLATE_STR = "non-init-value"
-TEMPLATE_FOV = 200.
+TEMPLATE_FOV = 20000.
 TEMPLATE_COL = COLORS["rose"]
 TEMPLATE_SPEED = 5.
 TEMPLATE_DRAG = 0.9

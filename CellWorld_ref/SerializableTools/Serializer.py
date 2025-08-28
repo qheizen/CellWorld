@@ -16,7 +16,7 @@ class WorldSerializer:
         world_manager = WorldManager()
 
         json_parser = JsonParser()
-        data_from_file = json_parser.load_json_from_file(path)
+        data_from_file:list = json_parser.load_json_from_file(path)
 
         for key, func in segment_funcs.items():
             segment_data = data_from_file.get(key)
@@ -27,6 +27,8 @@ class WorldSerializer:
                 _logger.critical(f"No data segment (name: {key})")
 
         _logger.info("World serialized!")
+        data_from_file.clear()
+        json_parser = None
         return world_manager
 
     def __serialize_global_options(self, segment: dict, world_manager: WorldManager):
