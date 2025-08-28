@@ -11,8 +11,8 @@ class Actor:
         self._name: str = static.get_random_hash()
         self._color: tuple = const.TEMPLATE_COL
         self._size: int = const.TEMPLATE_SIZE
-        self._draw_text_table: bool = True
-        self._draw_lines: bool = True
+        self._draw_text_table: bool = False
+        self._draw_lines: bool = False
         
         self._object_state: str = gconst.TEMPLATE_STATE
         self._vec_position = Vector2(0, 0)

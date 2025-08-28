@@ -67,21 +67,21 @@ class Simulation:
                 except Exception as e:
                     _logger.critical(f"Error updating actor {actor}, {e}")
                 
-                self._screen_layer.fill(self.game_manager.get_option("bg_color"))
-                for actor in self._actual_entities_on_board:
-                    try:
-                        actor.draw(self._screen_layer)
-                    except Exception as e:
-                        _logger.critical(f"Error drawing cell {actor}: {e}")
-                pygame.display.flip()
-                self._clock.tick(self.game_manager.get_option("fps") or 60)
+            self._screen_layer.fill(self.game_manager.get_option("bg_color"))
+            for actor in self._actual_entities_on_board:
+                try:
+                    actor.draw(self._screen_layer)
+                except Exception as e:
+                    _logger.critical(f"Error drawing cell {actor}: {e}")
+            pygame.display.flip()
+            self._clock.tick(self.game_manager.get_option("fps") or 60)
         
         pygame.quit()
             
     def initialize_spawn(self):
         try:
             planet = self.game_manager.get_cell_prototype_with_name("namev")
-            for i in range(2):
+            for i in range(20):
                 self.spawn_to_world(planet)
         except Exception as e:
             print(f"Error while spawning initial cells: {e}")

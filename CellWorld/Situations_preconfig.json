@@ -21,18 +21,18 @@
         "name": "namev",
         "color": [111, 111, 111],
         "visual_distance": 40000,
-        "size": 6,
+        "size": 10,
         "draw_text_table": true,
         "draw_lines": true,
         "death_color": [70, 70, 70]
       },
       
       "physical": {
-        "cell_mass": 300.0,
+        "cell_mass": 30.0,
         "cell_min_speed": 0.0,
-        "cell_max_speed": 10.0,
-        "strength": 2,
-        "drag_factor": 0.9,
+        "cell_max_speed": 20.0,
+        "strength": 3,
+        "drag_factor": 0.95,
         
         "is_movable": true,
         "is_gravitate": true
@@ -73,7 +73,7 @@
         ],
 
         "friendship": [
-          {"cell_type_name": "namev", "friend_distance": 4000, "is_line_need": false}
+          {"cell_type_name": "namev", "friend_distance": 40, "is_line_need": false}
         ]
       },
 

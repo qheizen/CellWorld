@@ -145,8 +145,8 @@ class Cell(actor.Actor):
                                 (int(self._hunting_at._vec_position.x), int(self._hunting_at._vec_position.y)))
         
         if self._draw_text_table:
-            text_to_draw = f"name: {self._name} hunger: {self._hunger:.2f} timer: {self._local_timer:.2f}"
-            static.draw_text_table(surface, text_to_draw, self._vec_position.x, self._vec_position.y, const.COLORS["gray"])
+            text_to_draw = f"n: {self._name} h: {self._hunger:.2f} t: {self._local_timer:.2f} s: {self._object_state}"
+            static.draw_text_table(surface, text_to_draw, self._vec_position.x + const.TEXT_OFFSET, self._vec_position.y + const.TEXT_OFFSET, const.COLORS["gray"])
             
     def console_print(self):
         _logger.warning(
@@ -210,8 +210,6 @@ class Cell(actor.Actor):
 
         if self._local_timer >= self._last_spawn_time + self._spawn_delay:
             self.init_spawner_ability()
-            
-        self._local_timer += 1 / self._get_fps()
         
     def init_spawner_ability(self):
         if self._object_state == "dead":
@@ -286,7 +284,7 @@ class Cell(actor.Actor):
         
 
     def _metabolize_tick(self):
-        if self._object_state != gconst.OBJECT_STATES["alive"] or self.is_metabolism:
+        if self._object_state != gconst.OBJECT_STATES["alive"] or not self.is_metabolism:
             return
 
         self._hunger -= self._metabolism / self._get_fps()
@@ -363,9 +361,10 @@ class Cell(actor.Actor):
         self.init_death()
     
     def init_death(self):
-        super().init_death()
-        self._hunting_at = None
-        self._color = self._death_color or const.COLORS["gray"]
+        if self.is_mortal:
+            super().init_death()
+            self._hunting_at = None
+            self._color = self._death_color or const.COLORS["gray"]
         
     def clone(self) -> "Cell":
         new = Cell()
@@ -383,6 +382,8 @@ class Cell(actor.Actor):
         new.is_movable = self.is_movable
         new.is_gravitate = self.is_gravitate
         new._drag_factor = self._drag_factor
+        new._draw_text_table = self._draw_text_table
+        new._draw_lines = self._draw_lines
         
         new._metabolism = self._get_mutated_value(self._metabolism)
         new._hunger_trigger = self._hunger_trigger
