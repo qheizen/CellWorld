@@ -1,13 +1,13 @@
 
     
 import pygame
-import CellWorld_ref.SerializableTools.Serializer as sr
-from CellWorld_ref.Actors.LocalEntities.Cell import Cell
-from CellWorld_ref.Actors.LocalEntities.Group import Group
-from CellWorld_ref.Actors.LocalEntities.Event import Event
-from CellWorld_ref.Actors.LocalEntities.ActorClass import Actor
-from CellWorld_ref.Actors.GlobalEntities.EventManager import EventManager
-import CellWorld_ref.Tools.Logger.loggers as lg
+import CellWorld.SerializableTools.Serializer as sr
+from CellWorld.Actors.LocalEntities.Cell import Cell
+from CellWorld.Actors.LocalEntities.Group import Group
+from CellWorld.Actors.LocalEntities.Event import Event
+from CellWorld.Actors.LocalEntities.ActorClass import Actor
+from CellWorld.Actors.GlobalEntities.EventManager import EventManager
+import CellWorld.Tools.Logger.loggers as lg
 
 _logger = lg.get_module_logger("GameManager")
 

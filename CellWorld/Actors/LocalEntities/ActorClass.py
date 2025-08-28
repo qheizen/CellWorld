@@ -1,6 +1,6 @@
-import CellWorld_ref.Constants.Constants as const
-import CellWorld_ref.Constants.InGameConst as gconst
-import CellWorld_ref.Tools.StaticLib as static
+import CellWorld.Constants.Constants as const
+import CellWorld.Constants.InGameConst as gconst
+import CellWorld.Tools.StaticLib as static
 from pygame import Vector2
 import pygame
 

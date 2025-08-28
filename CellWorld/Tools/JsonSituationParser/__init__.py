@@ -1,3 +1,3 @@
-from . import json_parser
+from . import JsonParser
 
-__all__ = ["json_parser"]
+__all__ = ["JsonParser"]

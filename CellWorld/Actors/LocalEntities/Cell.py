@@ -1,8 +1,8 @@
-import CellWorld_ref.Constants.Constants as const
-import CellWorld_ref.Constants.InGameConst as gconst
-import CellWorld_ref.Tools.StaticLib as static
-import CellWorld_ref.Tools.Logger.loggers as lg
-import CellWorld_ref.Actors.LocalEntities.ActorClass as actor
+import CellWorld.Constants.Constants as const
+import CellWorld.Constants.InGameConst as gconst
+import CellWorld.Tools.StaticLib as static
+import CellWorld.Tools.Logger.loggers as lg
+import CellWorld.Actors.LocalEntities.ActorClass as actor
 import random
 import pygame
 import copy

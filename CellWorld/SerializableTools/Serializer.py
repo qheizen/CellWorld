@@ -1,6 +1,6 @@
-from CellWorld_ref.Actors.GlobalEntities.GameManager import WorldManager
-from CellWorld_ref.Tools.JsonSituationParser.JsonParser import JsonParser
-import CellWorld_ref.Tools.Logger.loggers as lg
+from CellWorld.Actors.GlobalEntities.GameManager import WorldManager
+from CellWorld.Tools.JsonSituationParser.JsonParser import JsonParser
+import CellWorld.Tools.Logger.loggers as lg
 
 _logger = lg.get_module_logger("SERIALIZER")
 

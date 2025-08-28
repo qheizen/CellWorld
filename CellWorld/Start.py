@@ -6,7 +6,7 @@ _project_root = os.path.dirname(_this_dir)
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
-import CellWorld_ref.Actors.GlobalEntities.SimulationManager as simuc
+import CellWorld.Actors.GlobalEntities.SimulationManager as simuc
 
 sim = simuc.Simulation()
 sim.initialize_game("CellWorld/Situations_preconfig.json")

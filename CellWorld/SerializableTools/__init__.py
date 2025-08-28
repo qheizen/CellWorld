@@ -1,3 +1,3 @@
-from . import world_serializer
+from . import Serializer
 
-__all__ = ["world_serializer"]
+__all__ = ["Serializer"]

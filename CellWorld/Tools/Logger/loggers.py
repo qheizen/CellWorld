@@ -1,13 +1,13 @@
 import logging
 
 class CustomFormatter(logging.Formatter):
-
+    
     purple = "\x1b[1;35m"
     yellow = "\x1b[1;33m"
     red = "\x1b[31;1m"
     reset = "\x1b[0m"
     green = "\x1b[1;32m"
-
+    
     format_info = "{COLOR}%(levelname)s{RESET} - %(message)s"
     format_other = "{COLOR}%(levelname)s{RESET} - %(message)s"
 
@@ -26,6 +26,7 @@ class CustomFormatter(logging.Formatter):
 
 def get_module_logger(mod_name=''):
     logger = logging.getLogger(mod_name)
+    
     if not logger.handlers:
         handler = logging.StreamHandler()
         formatter = CustomFormatter()

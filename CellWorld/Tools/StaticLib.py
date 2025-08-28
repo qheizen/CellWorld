@@ -1,6 +1,6 @@
 from pygame import Vector2
 import pygame
-import CellWorld_ref.Constants.Constants as const
+import CellWorld.Constants.Constants as const
 import random
 import hashlib
 
