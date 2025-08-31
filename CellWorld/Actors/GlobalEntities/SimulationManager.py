@@ -1,6 +1,6 @@
-
-    
 import pygame
+import CellWorld.Tools.StaticLib as static
+import CellWorld.Constants.Constants as const
 import CellWorld.SerializableTools.Serializer as sr
 from CellWorld.Actors.LocalEntities.Cell import Cell
 from CellWorld.Actors.LocalEntities.Group import Group
@@ -73,15 +73,16 @@ class Simulation:
                     actor.draw(self._screen_layer)
                 except Exception as e:
                     _logger.critical(f"Error drawing cell {actor}: {e}")
+                    
+            if self.game_manager.get_option("debug_draw"):
+                self.draw_debug_info(self._screen_layer)
             pygame.display.flip()
             self._clock.tick(self.game_manager.get_option("fps") or 60)
-        
         pygame.quit()
             
     def initialize_spawn(self):
-        try:
-            planet = self.game_manager.get_cell_prototype_with_name("namev")
-            for i in range(20):
-                self.spawn_to_world(planet)
-        except Exception as e:
-            print(f"Error while spawning initial cells: {e}")
+        pass
+            
+    def draw_debug_info(self, screen):
+        text_to_draw = f"FPS: {self._clock.get_fps()}"
+        static.draw_text_table(screen, text_to_draw, 0, 0, const.COLORS["gray"])

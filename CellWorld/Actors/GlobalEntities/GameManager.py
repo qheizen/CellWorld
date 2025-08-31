@@ -121,3 +121,13 @@ class WorldManager:
                 _logger.info(f"Trying to take cell_group example (name: {name})")
                 return item
         return None
+    
+    
+    def on_button_click(self, *args):
+        print("GameManager: Button clicked with args:", args)
+
+    def on_text_submit(self, text: str):
+        print("GameManager: Text submitted:", text)
+
+    def on_form_submit(self, form_data):
+        print("GameManager: Form submitted:", form_data)

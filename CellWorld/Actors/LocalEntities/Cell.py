@@ -197,7 +197,7 @@ class Cell(actor.Actor):
         if speed < self._speed_min:
             self.add_velocity(self._speed_min / self._get_fps())
             
-        self.add_position(self._vec_velocity / self._get_fps())
+        self.add_position(self._vec_velocity)
         self._vec_velocity *= self._drag_factor
         return
 
@@ -351,7 +351,7 @@ class Cell(actor.Actor):
                 if not self._hunting_at or dist <= (self._vec_position - self._hunting_at._vec_position).length():
                     self._hunting_at = other
                 
-                if dist <= self._hunt_radius:
+                if dist <= self._hunt_radius and other.is_mortal:
                     other.attach_to(self)
                     self._hunger += other._hunger * food_type["stats_multiplier"]
         return force_to_return

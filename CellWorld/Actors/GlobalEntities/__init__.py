@@ -1,7 +1,8 @@
-from . import EventManager, GameManager, SimulationManager
+from . import EventManager, GameManager, SimulationManager, GuiManager
 
 __all__ = [
     "EventManager",
     "GameManager",
-    "SimulationManager"
+    "SimulationManager",
+    "GuiManager"
 ]

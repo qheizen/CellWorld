@@ -2,13 +2,13 @@
   "global_options": {
     "credentials": {
       "fps_lock": 60,
-      "window_size": [1920, 1080],
+      "window_size": [480, 320],
       "background_color": [0, 0, 40],
       "debug_draw": true
     },
     "physical": {
       "wall_margin": 200,
-      "wall_strength": 100,
+      "wall_strength": 300,
       "constants": {
         "g": 9.8
       }
@@ -20,17 +20,17 @@
       "credentials": {
         "name": "namev",
         "color": [111, 111, 111],
-        "visual_distance": 40000,
-        "size": 10,
-        "draw_text_table": true,
+        "visual_distance": 400,
+        "size": 3,
+        "draw_text_table": false,
         "draw_lines": true,
         "death_color": [70, 70, 70]
       },
       
       "physical": {
-        "cell_mass": 30.0,
+        "cell_mass": 1.0,
         "cell_min_speed": 0.0,
-        "cell_max_speed": 20.0,
+        "cell_max_speed": 2.0,
         "strength": 3,
         "drag_factor": 0.95,
         
@@ -69,7 +69,7 @@
         ],
 
         "relationship": [
-          {"cell_type_name": "namev", "relation": 0, "preferred_distance": 15, "hunger_distance": 10}
+          {"cell_type_name": "namev", "relation": -50, "preferred_distance": 15, "hunger_distance": 10}
         ],
 
         "friendship": [
