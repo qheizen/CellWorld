@@ -7,6 +7,13 @@ COLORS: dict = {
     "gray": (200, 200, 200)
 }
 
+STATUSES: dict = {
+    "0":"idle",
+    "1":"animation",
+    "2":"hold",
+    "3":"in_progress",
+}
+
 
 TEXT_OFFSET = 5
 WINSIZE = [480, 320]

@@ -1,1 +1,1 @@
-__all__ = ["GlobalEntities", "LocalEntites"]
+__all__ = ["GlobalEntities", "LocalEntites", "GUI"]

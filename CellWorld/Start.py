@@ -7,6 +7,9 @@ if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 import CellWorld.Actors.GlobalEntities.SimulationManager as simuc
+from CellWorld.Actors.GlobalEntities.GameManager import WorldManager
+
+import pygame
 
 class GameScene(simuc.Simulation):
     
@@ -15,16 +18,16 @@ class GameScene(simuc.Simulation):
         self.selected_cell = None
         self.gui_manager = None
         
-    def initialize_game(self, path, gui_manager):
+    def initialize_game(self, path):
         super().initialize_game(path)
-        self.gui_manager = gui_manager
-        gui_manager.simulation_manager = self
     
     def initialize_spawn(self):
         try:
             planet = self.game_manager.get_cell_prototype_with_name("namev")
-            for i in range(10):
+            planet1 = self.game_manager.get_cell_prototype_with_name("namev1")
+            for i in range(30):
                 self.spawn_to_world(planet)
+                self.spawn_to_world(planet1)
         except Exception as e:
             print(f"Error while spawning initial cells: {e}")
 

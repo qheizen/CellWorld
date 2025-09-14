@@ -29,8 +29,8 @@ def random_vector(start=-const.RANDOM_RANGE, final=const.RANDOM_RANGE):
         )
     
     
-def draw_text_table(canvas, text, x, y, color = const.TEMPLATE_COL):
-    font = pygame.font.SysFont(const.FONT, const.FONT_SIZE)
+def draw_text_table(canvas, text, x, y, color = const.TEMPLATE_COL, font = const.FONT, fontsize = const.FONT_SIZE):
+    font = pygame.font.SysFont(font, fontsize)
     text_surface = font.render(text, True, color)
     canvas.blit(text_surface, (x, y))
     

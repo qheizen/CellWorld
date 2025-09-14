@@ -4,5 +4,5 @@ __all__ = [
     "EventManager",
     "GameManager",
     "SimulationManager",
-    "GuiManager"
+    "GuiManager",
 ]

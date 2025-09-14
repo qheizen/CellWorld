@@ -1,8 +1,9 @@
-from . import Botton, ActiveObject, Form, TextField
+from . import ActiveObject, Button, Checkbox, Frame, TextInput
 
 __all__ = [
     "ActiveObject",
-    "Botton",
-    "Form",
-    "TextField"
+    "Button",
+    "Checkbox",
+    "Frame",
+    "TextInput"
 ]
