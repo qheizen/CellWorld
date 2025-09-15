@@ -8,7 +8,7 @@ class Button(ActiveObject):
         super().__init__(id, pos, size, color, form_id)
         self.text = text
         self.text_color = text_color
-        self.font = pygame.font.SysFont(None, 24)
+        self.font = pygame.font.SysFont("Consolas", 15)
         self._normal_color = color
         
     def draw(self, screen):

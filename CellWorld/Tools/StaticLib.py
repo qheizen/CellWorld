@@ -3,6 +3,7 @@ import pygame
 import CellWorld.Constants.Constants as const
 import random
 import hashlib
+from pygame._sdl2 import Window
 
 def convert_to_vec(value) -> Vector2:
     """
@@ -37,3 +38,4 @@ def draw_text_table(canvas, text, x, y, color = const.TEMPLATE_COL, font = const
 
 def get_random_hash():
     return hashlib.md5(str(random.random()).encode()).hexdigest()
+    

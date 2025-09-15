@@ -8,7 +8,6 @@ if _project_root not in sys.path:
 
 import CellWorld.Actors.GlobalEntities.SimulationManager as simuc
 from CellWorld.Actors.GlobalEntities.GameManager import WorldManager
-
 import pygame
 
 class GameScene(simuc.Simulation):
@@ -34,4 +33,5 @@ class GameScene(simuc.Simulation):
 sim = GameScene()
 sim.initialize_game("CellWorld/Situations_preconfig.json")
 sim.initialize_spawn()
+sim.initialize_gui()
 sim.main()

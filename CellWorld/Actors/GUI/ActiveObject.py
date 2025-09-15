@@ -22,6 +22,9 @@ class ActiveObject:
         self.is_clickable = True
         self.is_hovered = False
         self.is_pressed = False
+        self.offset = 10
+        self.offset_x = pos[0]
+        self.offset_y = pos[1]
         
         self.status = const.STATUSES["0"]
         self._active_func = None

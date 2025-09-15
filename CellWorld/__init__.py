@@ -3,6 +3,7 @@ __all__ = [
     "Actors",
     "Tools",
     "SerializableTools",
+    "InterfaceTemplates"
 ]
 
 __version__ = "0.1.0"

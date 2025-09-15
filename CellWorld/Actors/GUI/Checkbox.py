@@ -8,7 +8,7 @@ class Checkbox(ActiveObject):
         self.text = text
         self.text_color = text_color
         self.checked = checked
-        self.font = pygame.font.SysFont(None, 22)
+        self.font = pygame.font.SysFont("Consolas", 15)
         self.box_size = size
         self._normal_color = color
         
@@ -18,14 +18,14 @@ class Checkbox(ActiveObject):
             
         box_rect = pygame.Rect(self.rectangle.x, self.rectangle.y, 
                               self.box_size[0], self.box_size[1])
-        pygame.draw.rect(screen, self._bg_color, box_rect, border_radius=4)
+        pygame.draw.rect(screen, (55,51,86), box_rect, border_radius=4)
         pygame.draw.rect(screen, (100, 100, 100), box_rect, width=2, border_radius=4)
         
         if self.checked:
-            pygame.draw.line(screen, (0, 0, 0), 
+            pygame.draw.line(screen, (230, 230, 230), 
                             (box_rect.x + 4, box_rect.y + box_rect.height // 2),
                             (box_rect.x + box_rect.width // 2, box_rect.y + box_rect.height - 6), 3)
-            pygame.draw.line(screen, (0, 0, 0), 
+            pygame.draw.line(screen, (230, 230, 230), 
                             (box_rect.x + box_rect.width // 2, box_rect.y + box_rect.height - 6),
                             (box_rect.x + box_rect.width - 4, box_rect.y + 4), 3)
         

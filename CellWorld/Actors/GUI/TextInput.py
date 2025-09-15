@@ -2,13 +2,13 @@ import pygame
 from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 
 class TextInput(ActiveObject):
-    def __init__(self, id, pos=(0, 0), size=(200, 40), color=(255, 255, 255), 
-                 text_color=(0, 0, 0), placeholder="", form_id=None):
+    def __init__(self, id, pos=(0, 0), size=(200, 30), color=(55,51,86), 
+                 text_color=(230, 230, 230), placeholder="", form_id=None):
         super().__init__(id, pos, size, color, form_id)
         self.text_color = text_color
         self.placeholder = placeholder
         self.value = ""
-        self.font = pygame.font.SysFont(None, 24)
+        self.font = pygame.font.SysFont("Consolas", 15)
         self.focusable = True
         self.focused = False
         self.cursor_visible = True
@@ -19,8 +19,8 @@ class TextInput(ActiveObject):
         if not self.is_visible:
             return
             
-        pygame.draw.rect(screen, self._bg_color, self.rectangle, border_radius=5)
-        border_color = (100, 100, 255) if self.focused else (100, 100, 100)
+        pygame.draw.rect(screen, (55,51,86), self.rectangle, border_radius=5)
+        border_color = (100, 100, 255) if self.focused else (55,51,86)
         pygame.draw.rect(screen, border_color, self.rectangle, width=2, border_radius=5)
         
         display_text = self.value if self.value else self.placeholder

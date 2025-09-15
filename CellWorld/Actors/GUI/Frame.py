@@ -9,6 +9,7 @@ class Frame(ActiveObject):
         self.padding = 10
         self.spacing = 5
         self.layout_dirty = True
+        self.dragging = False
         
     def add(self, child):
         self.children.append(child)
@@ -19,8 +20,8 @@ class Frame(ActiveObject):
         if not self.is_visible:
             return
             
-        pygame.draw.rect(screen, self._bg_color, self.rectangle, border_radius=5)
-        pygame.draw.rect(screen, (200, 200, 200), self.rectangle, width=1, border_radius=5)
+        pygame.draw.rect(screen, (47,41,75), self.rectangle, border_radius=10)
+        pygame.draw.rect(screen, (255,255,255), self.rectangle, width=2, border_radius=10)
  
         if self.layout_dirty:
             self._update_layout()
@@ -47,6 +48,28 @@ class Frame(ActiveObject):
     def handle_event(self, event):
         if not self.is_visible or not self.is_enabled:
             return False
+        
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                mouse_x, mouse_y = event.pos
+                if (self.rectangle.x <= mouse_x <= self.rectangle.x + self.rectangle.width and 
+                    self.rectangle.y <= mouse_y <= self.rectangle.y + 25):
+                    self.dragging = True
+                    self.drag_offset = (mouse_x - self.rectangle.x, mouse_y - self.rectangle.y)
+                    return True
+                    
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                self.dragging = False
+                
+        elif event.type == pygame.MOUSEMOTION:
+            if self.dragging:
+                mouse_x, mouse_y = event.pos
+                self.set_pos(mouse_x - self.drag_offset[0], mouse_y - self.drag_offset[1])
+                for child in self.children:
+                    child.rectangle.x = (-child.offset_x) + child.offset + self._position.x
+                    child.rectangle.y = (-child.offset_y) + child.offset + self._position.y
+                return True
             
         for child in reversed(self.children):
             if child.is_visible and child.is_enabled and child.handle_event(event):
@@ -66,3 +89,5 @@ class Frame(ActiveObject):
                 children_data = child.get_children_data(form_id)
                 data.update(children_data)
         return data
+    
+    
