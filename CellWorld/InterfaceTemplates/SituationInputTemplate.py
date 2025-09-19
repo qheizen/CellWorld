@@ -149,6 +149,7 @@ def spawner_window(gui_manager, game_manager, sim_manager, console_manager):
         create_cell_frame.status = "killed"
         sim_manager.pointer_is_busy = False
         sim_manager.is_window_spawn = False
+        sim_manager.cell_type_name = None
         
     kill_btn = Button("kill", "Закрыть окно", (0, -90), (100, 40), (235, 128, 114), 
                        (255, 255, 255), "create_cell_to_world")
