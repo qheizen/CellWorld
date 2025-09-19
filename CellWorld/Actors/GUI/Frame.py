@@ -3,7 +3,7 @@ from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 
 class Frame(ActiveObject):
     
-    def __init__(self, id, pos=(0, 0), size=(0, 0), color=(240, 240, 240), form_id=None, padding = 10, offset = 10, board_pad = 2):
+    def __init__(self, id, pos=(0, 0), size=(0, 0), color=(240, 240, 240), form_id=None, padding = 10, offset = 10, board_pad = 2, board_color = (255,255,255)):
         super().__init__(id, pos, size, color, form_id, offset)
         self.children = []
         self.padding = padding
@@ -11,6 +11,7 @@ class Frame(ActiveObject):
         self.layout_dirty = True
         self.dragging = False
         self._bord_radius = board_pad
+        self._bord_color = board_color
         
     def add(self, child):
         self.children.append(child)
@@ -23,7 +24,7 @@ class Frame(ActiveObject):
             
         pygame.draw.rect(screen, self._bg_color, self.rectangle, border_radius=10)
         if not self._bord_radius == 0:
-            pygame.draw.rect(screen, (255,255,255), self.rectangle, width=self._bord_radius, border_radius=10)
+            pygame.draw.rect(screen, self._bord_color, self.rectangle, width=self._bord_radius, border_radius=10)
  
         if self.layout_dirty:
             self._update_layout()

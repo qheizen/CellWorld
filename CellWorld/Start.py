@@ -7,14 +7,11 @@ if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 import CellWorld.Actors.GlobalEntities.SimulationManager as simuc
-from CellWorld.Actors.GlobalEntities.GameManager import WorldManager
-import pygame
 
 class GameScene(simuc.Simulation):
     
     def __init__(self):
         super().__init__()
-        self.gui_manager = None
         
     def initialize_game(self, path):
         super().initialize_game(path)

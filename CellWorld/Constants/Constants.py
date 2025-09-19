@@ -5,7 +5,7 @@ COLORS: dict = {
     "rose": (255, 105, 180),
     "missed": (255, 0, 255),
     "gray": (200, 200, 200),
-    "blue": (117, 165, 239),
+    "blue": (83,141,180),
 }
 
 STATUSES: dict = {
@@ -17,7 +17,7 @@ STATUSES: dict = {
 }
 
 
-TEXT_OFFSET = 5
+TEXT_OFFSET = 6
 WINSIZE = [480, 320]
 
 TEMPLATE_MASS = 10.

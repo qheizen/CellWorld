@@ -7,9 +7,9 @@
         720
       ],
       "background_color": [
-        0,
-        0,
-        40
+        15,
+        25,
+        63
       ],
       "debug_draw": true
     },

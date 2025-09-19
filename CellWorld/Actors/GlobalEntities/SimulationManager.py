@@ -25,6 +25,7 @@ class Simulation:
         
         self._event_manager = None
         self._console_manager = None
+        self._info_table = None
         self._actual_entities_on_board = []
         self._gui = None
         
@@ -40,6 +41,7 @@ class Simulation:
         
     def initialize_game(self, path: str):
         serializer = sr.WorldSerializer()
+        pygame.display.set_caption('Cell world')
         self.game_manager = serializer.serialize_world(path)
         self.game_manager.set_simulation_manager(self)
         self.save_manager = SaveManager(path)
@@ -47,6 +49,7 @@ class Simulation:
         
         windows_size = self.game_manager.get_option("window_size")
         self._console_manager = DebugConsoleObject((10, windows_size[1] - 75), (300, 100), const.COLORS["blue"], 15,2)
+        self._info_table = DebugConsoleObject((10, 10), (300, 100), const.COLORS["blue"], 15,2, filled=True)
         if windows_size and isinstance(windows_size, (list, tuple)):
             try:
                 w, h = int(windows_size[0]), int(windows_size[1])
@@ -111,8 +114,9 @@ class Simulation:
             
             
             if self.game_manager.get_option("debug_draw"):
-                self._console_manager.draw(self._screen_layer)       
-                self.draw_debug_info(self._screen_layer)
+                self.draw_debug_info()
+                self._console_manager.draw(self._screen_layer)  
+                self._info_table.draw(self._screen_layer)     
                 
             self._gui.draw(self._screen_layer)
             pygame.display.flip()
@@ -126,9 +130,10 @@ class Simulation:
         self._gui = sit.main_interface(self._gui, self.save_manager, self.game_manager, self, self._console_manager)
         return
             
-    def draw_debug_info(self, screen):
-        text_to_draw = f"FPS: {self._clock.get_fps()}"
-        static.draw_text_table(screen, text_to_draw, 0, 0, const.COLORS["gray"])
+    def draw_debug_info(self):
+        text_to_draw = [f"fps : {self._clock.get_fps():.3}", 
+                        f"actives count : {len(self._actual_entities_on_board)}"]
+        self._info_table.reform_stack(text_to_draw)
         
     def draw_from_mouse_to_cell(self, surface, cell):
         mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -147,8 +152,12 @@ class Simulation:
         if not self.is_change_cell:
             return
         
+        if self.control_cell:
+            self.control_cell._draw_text_table = False
+        
         if not self.control_cell and self._actual_entities_on_board:
             self.control_cell = self._actual_entities_on_board[0]
+            self.control_cell._draw_text_table = True
             return
         
         actual_idx = self._actual_entities_on_board.index(self.control_cell)
@@ -159,6 +168,8 @@ class Simulation:
         elif shift_idx < 0:
             if actual_idx != len(self._actual_entities_on_board):
                 self.control_cell = self._actual_entities_on_board[actual_idx-1]
+        
+        self.control_cell._draw_text_table = True
     
     def open_control_cell_tab(self):
         self._console_manager.console_print(f"Info - Cell control window was opened")

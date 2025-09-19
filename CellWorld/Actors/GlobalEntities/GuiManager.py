@@ -34,7 +34,7 @@ class GUIManager:
                     current_hovered = widget
                     if not was_hovered:
                         widget.on_mouse_enter()
-                elif was_hovered:
+                elif not widget.is_hovered:
                     widget.on_mouse_leave()
             
             if widget.is_visible and widget.is_enabled:

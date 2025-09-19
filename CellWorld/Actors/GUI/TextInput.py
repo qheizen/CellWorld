@@ -2,7 +2,7 @@ import pygame
 from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 
 class TextInput(ActiveObject):
-    def __init__(self, id, pos=(0, 0), size=(200, 30), color=(55,51,86), 
+    def __init__(self, id, pos=(0, 0), size=(200, 30), color=(40,30,79), 
                  text_color=(230, 230, 230), placeholder="", form_id=None, type_name: type = str, font_size = 15):
         super().__init__(id, pos, size, color, form_id)
         self.text_color = text_color

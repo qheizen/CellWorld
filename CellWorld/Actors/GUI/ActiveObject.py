@@ -72,7 +72,8 @@ class ActiveObject:
                 else:
                     self.set_target_color(self.get_normal_color())
                 return True
-            
+            else:
+                self.set_target_color(self.get_normal_color())
         return False
     
     def set_target_color(self, color):

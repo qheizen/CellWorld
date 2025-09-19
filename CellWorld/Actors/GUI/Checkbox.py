@@ -15,11 +15,14 @@ class Checkbox(ActiveObject):
     def draw(self, screen):
         if not self.is_visible:
             return
+        
+        color = (55,51,86) if not self.checked else (235, 128, 114)
+        color1 = (100, 100, 100) if not self.checked else (230, 114, 109)
             
         box_rect = pygame.Rect(self.rectangle.x, self.rectangle.y, 
                               self.box_size[0], self.box_size[1])
-        pygame.draw.rect(screen, (55,51,86), box_rect, border_radius=4)
-        pygame.draw.rect(screen, (100, 100, 100), box_rect, width=2, border_radius=4)
+        pygame.draw.rect(screen, color, box_rect, border_radius=4)
+        pygame.draw.rect(screen, color1, box_rect, width=2, border_radius=4)
         
         if self.checked:
             pygame.draw.line(screen, (230, 230, 230), 

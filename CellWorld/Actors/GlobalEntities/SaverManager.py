@@ -1,5 +1,6 @@
 import json
 import copy
+import random
 import re
 
 class SaveManager:
@@ -280,7 +281,8 @@ class SaveManager:
         else:
             # Это плоские данные, нужно преобразовать
             structured_data = self._convert_flat_to_structured(cell_data)
-        
+            
+        structured_data['credentials']['color'] = (random.randint(1,240), random.randint(1,240), random.randint(1,240))
         # Проверяем наличие имени
         if not structured_data['credentials']['name']:
             raise ValueError("Клетка должна иметь имя")

@@ -52,7 +52,7 @@ def create_cell_window(gui_manager, saver_manager=None, sim_manager=None):
         form_data = gui_manager.get_form_data("create_cell")
         saver_manager.save_cell(form_data)
         
-    submit_btn = Button("submit", "Создать клетку", (0, -370), (100, 40), (117, 165, 235), 
+    submit_btn = Button("submit", "Создать клетку", (0, -370), (100, 40), (109, 118, 224), 
                        (255, 255, 255), "create_cell")
     submit_btn.set_handler(submit_login)
     create_cell_frame.add(submit_btn)
@@ -61,7 +61,7 @@ def create_cell_window(gui_manager, saver_manager=None, sim_manager=None):
         create_cell_frame.status = "killed"
         sim_manager.pointer_is_busy = False
         
-    kill_btn = Button("kill", "Закрыть окно", (0, -420), (100, 40), (235, 128, 114), 
+    kill_btn = Button("kill", "Закрыть окно", (0, -420), (100, 40), (224, 121, 109), 
                        (255, 255, 255), "create_cell")
     kill_btn.set_handler(kill_window)
     create_cell_frame.add(kill_btn)
@@ -80,7 +80,7 @@ def del_cell_window(gui_manager, saver_manager=None, sim_manager=None):
         form_data = gui_manager.get_form_data("del_cell")
         saver_manager.del_cell(form_data.get("name"))
         
-    submit_btn = Button("submit", "Удалить клетку", (0, -40), (100, 40), (117, 165, 235), 
+    submit_btn = Button("submit", "Удалить клетку", (0, -40), (100, 40), (109, 118, 224), 
                        (255, 255, 255), "del_cell")
     submit_btn.set_handler(submit_login)
     create_cell_frame.add(submit_btn)
@@ -89,7 +89,7 @@ def del_cell_window(gui_manager, saver_manager=None, sim_manager=None):
         create_cell_frame.status = "killed"
         sim_manager.pointer_is_busy = False
         
-    kill_btn = Button("kill", "Закрыть окно", (0, -90), (100, 40), (235, 128, 114), 
+    kill_btn = Button("kill", "Закрыть окно", (0, -90), (100, 40), (224, 121, 109), 
                        (255, 255, 255), "del_cell")
     kill_btn.set_handler(kill_window)
     create_cell_frame.add(kill_btn)
@@ -101,7 +101,7 @@ def change_cell_to_control(gui_manager, sim_manager):
     sim_manager.pointer_is_busy = True
     change_cell_frame = Frame("control_form", (300, 200), (300, 130), (47,41,75), "control", padding = 10, offset = 10, board_pad =2)
     
-    select = Icon("submit", "Выбрать клетку", (0, -10), (40, 40), (117, 165, 235), 
+    select = Icon("submit", "Выбрать клетку", (0, -10), (40, 40), (109, 118, 224), 
                        (255, 255, 255), "control")
     def select_cell_here():
         sim_manager.select_current_cell()
@@ -207,8 +207,8 @@ def game_rules_change(gui_manager, game_manager, sim_manager, console_manager):
 def main_interface(gui_manager, saver_manager, game_manager, sim_manager, console_manager=None):
     if console_manager:
         console_manager.console_print("Info - Interface - Main Window opened")
-    
-    create_cell_frame = Frame("del_form", (0, 200), (80, 355), (47,41,75), "del_cell", padding = 10, offset = 10, board_pad =2)
+    windows_size = game_manager.get_option("window_size")
+    create_cell_frame = Frame("del_form", (windows_size[0]-71, 200), (71, 347), (47,41,75), "del_cell", padding = 10, offset = 10, board_pad =2)
     btn1 = Icon("submit", "", (0, -10), (40, 50), (117, 165, 239), 
                        (255, 255, 255), "no_it")
     def submit_login():
@@ -216,8 +216,8 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     btn1.set_handler(submit_login)
     create_cell_frame.add(btn1)
     
-    admin_panel = Icon("submit", "admin", (0, -40), (40, 50), (90, 120, 200), 
-                       (255, 255, 255), "no_it")
+    admin_panel = Icon("submit", "", (0, -40), (40, 50), (90, 120, 200), 
+                       (255, 255, 255), "no_it", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\admin_ico.png")
     def submit_login():
         if sim_manager.pointer_is_busy:
             if console_manager:
@@ -228,8 +228,8 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     admin_panel.set_handler(submit_login)
     create_cell_frame.add(admin_panel)
     
-    botton_create_window = Icon("cell", "add", (0, -80), (40, 50), (90, 120, 200), 
-                       (255, 255, 255), "no_it")
+    botton_create_window = Icon("cell", "", (0, -80), (40, 50), (90, 120, 200), 
+                       (255, 255, 255), "no_it", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_add_ico.png")
     def create_add_windows():
         if sim_manager.pointer_is_busy:
             if console_manager:
@@ -240,8 +240,8 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     botton_create_window.set_handler(create_add_windows)
     create_cell_frame.add(botton_create_window)
     
-    botton_cell_control = Icon("screen", "control", (0, -80), (40, 50), (90, 120, 200), 
-                       (255, 255, 255), "screen")
+    botton_cell_control = Icon("screen", "", (0, -80), (40, 50), (90, 120, 200), 
+                       (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_control_ico.png")
     def control_cell():
         if sim_manager.pointer_is_busy:
             if console_manager:
@@ -253,7 +253,7 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     botton_cell_control.set_handler(control_cell)
     create_cell_frame.add(botton_cell_control)
     
-    botton_cell_plus = Icon("screen", "", (0, -120), (50, 55), (90, 120, 200), 
+    botton_cell_plus = Icon("screen", "", (0, -120), (40, 50), (235, 128, 114), 
                        (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_plus_ico.png")
     def create_cell():
         if sim_manager.pointer_is_busy:
@@ -266,7 +266,7 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     botton_cell_plus.set_handler(create_cell)
     create_cell_frame.add(botton_cell_plus)
     
-    botton_cell_minus = Icon("screen", "", (0, -120), (50, 55), (90, 120, 200), 
+    botton_cell_minus = Icon("screen", "", (0, -120), (40, 50), (235, 128, 114), 
                        (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_minus_ico.png" )
     def delete_cell():
         if sim_manager.pointer_is_busy:
