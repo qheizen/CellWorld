@@ -1,4 +1,5 @@
 import pygame
+import os
 import CellWorld.Tools.StaticLib as static
 import CellWorld.Constants.Constants as const
 import CellWorld.SerializableTools.Serializer as sr
@@ -14,7 +15,6 @@ from CellWorld.Actors.GUI.DebugConsole import DebugConsoleObject
 import CellWorld.Tools.Logger.loggers as lg
 
 _logger = lg.get_module_logger("GameManager")
-
 class Simulation:
     
     def __init__(self):
@@ -39,6 +39,8 @@ class Simulation:
         self.cell_type_name = None
         self.is_window_spawn: bool = False
         
+        self._quit = True
+        
     def initialize_game(self, path: str):
         serializer = sr.WorldSerializer()
         pygame.display.set_caption('Cell world')
@@ -56,7 +58,7 @@ class Simulation:
             except Exception:
                 w, h = 800, 600
             self._event_manager = EventManager(self.game_manager)
-            self._screen_layer = pygame.display.set_mode((w, h))
+            self._screen_layer = pygame.display.set_mode((w, h), pygame.NOFRAME)
         self._clock = pygame.time.Clock()
         self._console_manager.console_print("Info - Init -> Main window initialized")
     
@@ -77,8 +79,7 @@ class Simulation:
         self._event_manager.activate_event(event_type, args, object)
         
     def main(self):
-        running = True
-        while running:
+        while self._quit:
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.QUIT:

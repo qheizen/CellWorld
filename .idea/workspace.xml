@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d13bb5f-aeaa-4553-a5a2-32a39c23f1f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Actors/GUI/ActiveObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Actors/GUI/ActiveObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Actors/GUI/Botton.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Actors/GUI/Botton.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Actors/GUI/Form.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Actors/GUI/Form.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Actors/GlobalEntities/GuiManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Actors/GlobalEntities/GuiManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Actors/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Actors/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Constants/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Constants/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Situations_preconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellWorld/Actors/GlobalEntities/SimulationManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Actors/GlobalEntities/SimulationManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CellWorld/InterfaceTemplates/SituationInputTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/InterfaceTemplates/SituationInputTemplate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CellWorld/Start.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Start.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CellWorld/Tools/StaticLib.py" beforeDir="false" afterPath="$PROJECT_DIR$/CellWorld/Tools/StaticLib.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

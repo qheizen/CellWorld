@@ -7,6 +7,7 @@ if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 import CellWorld.Actors.GlobalEntities.SimulationManager as simuc
+import pygame
 
 class GameScene(simuc.Simulation):
     
@@ -15,6 +16,8 @@ class GameScene(simuc.Simulation):
         
     def initialize_game(self, path):
         super().initialize_game(path)
+        bitmap_cursor2 = pygame.cursors.diamond
+        pygame.mouse.set_cursor(bitmap_cursor2)
     
     def initialize_spawn(self):
         try:

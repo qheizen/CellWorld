@@ -163,7 +163,7 @@ def game_rules_change(gui_manager, game_manager, sim_manager, console_manager):
         console_manager.console_print("Info - Interface - Admin panel opened")
         
     sim_manager.pointer_is_busy = True
-    create_cell_frame = Frame("admin_panel", (300, 100), (300, 120), (47,41,75), "admin_pan")
+    create_cell_frame = Frame("admin_panel", (300, 100), (300, 170), (47,41,75), "admin_pan")
     
     name_input = TextInput("g", (0, 0), (280, 30), (255, 255, 255), 
                               (240, 240, 240), "Глобальная константа G (float)", "admin_pan", float)
@@ -190,6 +190,34 @@ def game_rules_change(gui_manager, game_manager, sim_manager, console_manager):
     create_cell_frame.add(debug_draw)
     
     
+    debug_draw_cell = Checkbox("is_debug_cell", "Информация о клетках", (0, 20), (20, 20), 
+                             (255, 255, 255), (240, 240, 240), sim_manager._actual_entities_on_board[0]._draw_text_table, "admin_pan")
+    
+    def debug_draw_сel_func():
+        form_data:dict = gui_manager.get_form_data("admin_pan")
+        status = form_data.get("is_debug_cell", False)
+        for cell in sim_manager._actual_entities_on_board:
+            cell._draw_text_table = status
+        if console_manager:
+                console_manager.console_print(f"Info - Admin - Changed cell draw debug - {form_data.get("is_debug", False)}")
+    debug_draw_cell.set_handler(debug_draw_сel_func)
+    create_cell_frame.add(debug_draw_cell)
+    
+    
+    debug_draw_cell = Checkbox("is_debug_line_cell", "Информация о клетках", (0, 20), (20, 20), 
+                             (255, 255, 255), (240, 240, 240), sim_manager._actual_entities_on_board[0]._draw_lines, "admin_pan")
+    
+    def debug_draw_lines_func():
+        form_data:dict = gui_manager.get_form_data("admin_pan")
+        status = form_data.get("is_debug_line_cell", False)
+        for cell in sim_manager._actual_entities_on_board:
+            cell._draw_lines = status
+        if console_manager:
+                console_manager.console_print(f"Info - Admin - Changed cell draw debug - {form_data.get("is_debug", False)}")
+    debug_draw_cell.set_handler(debug_draw_lines_func)
+    create_cell_frame.add(debug_draw_cell)
+    
+    
     def kill_window():
         create_cell_frame.status = "killed"
         sim_manager.pointer_is_busy = False
@@ -209,12 +237,6 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
         console_manager.console_print("Info - Interface - Main Window opened")
     windows_size = game_manager.get_option("window_size")
     create_cell_frame = Frame("del_form", (windows_size[0]-71, 200), (71, 347), (47,41,75), "del_cell", padding = 10, offset = 10, board_pad =2)
-    btn1 = Icon("submit", "", (0, -10), (40, 50), (117, 165, 239), 
-                       (255, 255, 255), "no_it")
-    def submit_login():
-        create_cell_window(gui_manager, saver_manager, sim_manager)
-    btn1.set_handler(submit_login)
-    create_cell_frame.add(btn1)
     
     admin_panel = Icon("submit", "", (0, -40), (40, 50), (90, 120, 200), 
                        (255, 255, 255), "no_it", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\admin_ico.png")
@@ -280,5 +302,58 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     create_cell_frame.add(botton_cell_minus)
     
     
+    botton_exit = Icon("exit", "exit", (0, -120), (40, 50), (235, 128, 114), 
+                       (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_minus_ico.png" )
+    def delete_window():
+        if sim_manager.pointer_is_busy:
+            if console_manager:
+                console_manager.console_print("Error - Pointer is busy for now, cant operate")
+            _logger.warning("Pointer is busy for now, cant operate")
+            return
+        console_manager.console_print("Info - Interface - Open window. (name: exit window)")
+        exit_screen(gui_manager, sim_manager, console_manager)
+    botton_exit.set_handler(delete_window)
+    create_cell_frame.add(botton_exit)
+    
+    
     gui_manager.add(create_cell_frame)
     return gui_manager
+
+def exit_screen(gui_manager, sim_manager, console_manager):
+    if console_manager:
+        console_manager.console_print("Info - Interface - Exit window opened")
+        
+    if sim_manager.pointer_is_busy:
+        if console_manager:
+            console_manager.console_print("Error - Pointer is busy for now, cant operate")
+        _logger.warning("Pointer is busy for now, cant operate")
+        return
+    else:
+        sim_manager.pointer_is_busy = True
+        
+    create_cell_frame = Frame("admin_panel", (500, 200), (300, 107), (47,41,75), "kill_pan")
+    
+    def kill_window():
+        create_cell_frame.status = "killed"
+        sim_manager.pointer_is_busy = False
+        sim_manager._quit = False
+        
+    kill_btn = Button("kill", "Закрыть игру", (0, -90), (100, 40), (235, 128, 114), 
+                       (255, 255, 255), "kill_pan")
+    kill_btn.set_handler(kill_window)
+    create_cell_frame.add(kill_btn)
+    
+    def kill_window1():
+        create_cell_frame.status = "killed"
+        sim_manager.pointer_is_busy = False
+        
+    kill_btn1 = Button("kill", "Закрыть окно", (0, -90), (100, 40), (235, 128, 114), 
+                       (255, 255, 255), "kill_pan")
+    kill_btn1.set_handler(kill_window1)
+    create_cell_frame.add(kill_btn1)
+    
+    gui_manager.add(create_cell_frame)
+    return gui_manager
+    
+    
+    
