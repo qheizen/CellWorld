@@ -3,13 +3,14 @@ from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 
 class Frame(ActiveObject):
     
-    def __init__(self, id, pos=(0, 0), size=(0, 0), color=(240, 240, 240), form_id=None):
-        super().__init__(id, pos, size, color, form_id)
+    def __init__(self, id, pos=(0, 0), size=(0, 0), color=(240, 240, 240), form_id=None, padding = 10, offset = 10, board_pad = 2):
+        super().__init__(id, pos, size, color, form_id, offset)
         self.children = []
-        self.padding = 10
+        self.padding = padding
         self.spacing = 5
         self.layout_dirty = True
         self.dragging = False
+        self._bord_radius = board_pad
         
     def add(self, child):
         self.children.append(child)
@@ -20,8 +21,9 @@ class Frame(ActiveObject):
         if not self.is_visible:
             return
             
-        pygame.draw.rect(screen, (47,41,75), self.rectangle, border_radius=10)
-        pygame.draw.rect(screen, (255,255,255), self.rectangle, width=2, border_radius=10)
+        pygame.draw.rect(screen, self._bg_color, self.rectangle, border_radius=10)
+        if not self._bord_radius == 0:
+            pygame.draw.rect(screen, (255,255,255), self.rectangle, width=self._bord_radius, border_radius=10)
  
         if self.layout_dirty:
             self._update_layout()
@@ -64,11 +66,13 @@ class Frame(ActiveObject):
                 
         elif event.type == pygame.MOUSEMOTION:
             if self.dragging:
+                y_offset = self.padding
                 mouse_x, mouse_y = event.pos
                 self.set_pos(mouse_x - self.drag_offset[0], mouse_y - self.drag_offset[1])
                 for child in self.children:
-                    child.rectangle.x = (-child.offset_x) + child.offset + self._position.x
-                    child.rectangle.y = (-child.offset_y) + child.offset + self._position.y
+                    child.set_pos(self.rectangle.x + self.padding, self.rectangle.y + y_offset)
+                    child.set_size(self.rectangle.width - 2 * self.padding, child.rectangle.height)
+                    y_offset += child.rectangle.height + self.spacing
                 return True
             
         for child in reversed(self.children):

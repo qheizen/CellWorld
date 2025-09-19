@@ -4,11 +4,11 @@ from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 class Button(ActiveObject):
     
     def __init__(self, id, text, pos=(0, 0), size=(100, 40), color=(100, 150, 200), 
-                 text_color=(255, 255, 255), form_id=None):
+                 text_color=(255, 255, 255), form_id=None, font_size = 15):
         super().__init__(id, pos, size, color, form_id)
         self.text = text
         self.text_color = text_color
-        self.font = pygame.font.SysFont("Consolas", 15)
+        self.font = pygame.font.SysFont("Consolas", font_size)
         self._normal_color = color
         
     def draw(self, screen):

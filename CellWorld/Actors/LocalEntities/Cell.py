@@ -240,11 +240,10 @@ class Cell(actor.Actor):
     
     def _check_death(self):
         if self.is_mortal and self._is_hungerred and self._hunger <= 0:
-            self.initiate_death()
+            self.init_death()
         
         if self.is_mortal and self._lifetime > 0 and self._local_timer >= self._lifetime:
-            self.initiate_death()
-            
+            self.init_death()   
         
     def _inscreen_tick(self):
         margin = self._get_option("board_margin")

@@ -3,12 +3,12 @@ from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 
 class Checkbox(ActiveObject):
     def __init__(self, id, text, pos=(0, 0), size=(20, 20), color=(100, 150, 200), 
-                 text_color=(0, 0, 0), checked=False, form_id=None):
+                 text_color=(0, 0, 0), checked=False, form_id=None, font_size = 15):
         super().__init__(id, pos, (size[0] + 150, size[1]), color, form_id)
         self.text = text
         self.text_color = text_color
         self.checked = checked
-        self.font = pygame.font.SysFont("Consolas", 15)
+        self.font = pygame.font.SysFont("Consolas", font_size)
         self.box_size = size
         self._normal_color = color
         

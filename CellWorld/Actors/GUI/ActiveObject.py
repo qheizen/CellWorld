@@ -6,7 +6,7 @@ import CellWorld.Constants.Constants as const
 _logger = lg.get_module_logger("GUI")
 
 class ActiveObject:
-    def __init__(self, id, pos=(0, 0), size=(0, 0), color=const.TEMPLATE_COL, form_id=None):
+    def __init__(self, id, pos=(0, 0), size=(0, 0), color=const.TEMPLATE_COL, form_id=None, offset=10):
         self.id = id
         self._position = Vector2(pos)
         self._size = Vector2(size)
@@ -22,7 +22,7 @@ class ActiveObject:
         self.is_clickable = True
         self.is_hovered = False
         self.is_pressed = False
-        self.offset = 10
+        self.offset = offset
         self.offset_x = pos[0]
         self.offset_y = pos[1]
         
@@ -85,11 +85,11 @@ class ActiveObject:
     
     def get_hover_color(self):
         r, g, b = self._normal_color
-        return (min(r + 20, 255), min(g + 20, 255), min(b + 20, 255))
+        return (min(r - 20, 255), min(g - 20, 255), min(b - 20, 255))
     
     def get_pressed_color(self):
         r, g, b = self._normal_color
-        return (max(r - 20, 0), max(g - 20, 0), max(b - 20, 0))
+        return (max(r + 20, 0), max(g + 20, 0), max(b + 20, 0))
     
     def set_size(self, w, h):
         self._size.update(w, h)
@@ -109,3 +109,4 @@ class ActiveObject:
     def set_handler(self, func):
         if callable(func):
             self._active_func = func
+        

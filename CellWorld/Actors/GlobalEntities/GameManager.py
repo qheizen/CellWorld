@@ -131,3 +131,15 @@ class WorldManager:
 
     def on_form_submit(self, form_data):
         print("GameManager: Form submitted:", form_data)
+        
+    def get_cell_types_names(self):
+        result: str = ""
+        for type in self._cell_types:
+            result += f" {type._name}"
+        return result
+    
+    def set_attribute(self, name, value):
+        self._global_options[name] = value
+        
+    def set_special_attribute(self, name, value):
+        self._global_options["constants"][name] = value

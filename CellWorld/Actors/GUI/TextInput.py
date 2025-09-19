@@ -3,17 +3,18 @@ from CellWorld.Actors.GUI.ActiveObject import ActiveObject
 
 class TextInput(ActiveObject):
     def __init__(self, id, pos=(0, 0), size=(200, 30), color=(55,51,86), 
-                 text_color=(230, 230, 230), placeholder="", form_id=None):
+                 text_color=(230, 230, 230), placeholder="", form_id=None, type_name: type = str, font_size = 15):
         super().__init__(id, pos, size, color, form_id)
         self.text_color = text_color
         self.placeholder = placeholder
         self.value = ""
-        self.font = pygame.font.SysFont("Consolas", 15)
+        self.font = pygame.font.SysFont("Consolas", font_size)
         self.focusable = True
         self.focused = False
         self.cursor_visible = True
         self.cursor_timer = 0
         self._normal_color = color
+        self.type = type_name
         
     def draw(self, screen):
         if not self.is_visible:
@@ -68,16 +69,29 @@ class TextInput(ActiveObject):
                 return False
                 
         if self.focused and event.type == pygame.KEYDOWN:
+            value_before = self.value
             if event.key == pygame.K_BACKSPACE:
                 self.value = self.value[:-1]
+                if self._active_func:
+                    super()._activate_func()
                 return True
             elif event.key == pygame.K_RETURN:
                 self.focused = False
+                if self._active_func:
+                    super()._activate_func()
                 return True
             elif event.unicode and event.unicode.isprintable():
                 self.value += event.unicode
+            try:
+                self.type(self.value)
+                if self._active_func:
+                    super()._activate_func()
                 return True
-                
+            except Exception as e:
+                self.value = value_before
+                return True
+            
+            
         return super().handle_event(event)
         
     def get_value(self):

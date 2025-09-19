@@ -127,4 +127,16 @@ class Actor:
     def activate_event(self, event_type:str, args: list, object = None):
         if self._world_manager:
             self._world_manager.trigger_action(event_type, args, object)
+            
+    def control(self, keys):
+        speed = 30/60
+        if keys[pygame.K_w]:
+            self.add_velocity((0, -speed))
+        if keys[pygame.K_s]:
+            self.add_velocity((0, speed))
+        if keys[pygame.K_a]:
+            self.add_velocity((-speed, 0))
+        if keys[pygame.K_d]:
+            self.add_velocity((speed, 0))
+        
     

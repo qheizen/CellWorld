@@ -4,7 +4,8 @@ COLORS: dict = {
     "red": (180, 0, 0),
     "rose": (255, 105, 180),
     "missed": (255, 0, 255),
-    "gray": (200, 200, 200)
+    "gray": (200, 200, 200),
+    "blue": (117, 165, 239),
 }
 
 STATUSES: dict = {
@@ -12,6 +13,7 @@ STATUSES: dict = {
     "1":"animation",
     "2":"hold",
     "3":"in_progress",
+    "4":"killed",
 }
 
 

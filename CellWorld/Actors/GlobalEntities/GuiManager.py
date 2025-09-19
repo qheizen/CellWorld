@@ -23,6 +23,9 @@ class GUIManager:
         
         current_hovered = None
         for widget in reversed(self.widgets):
+            if widget.status == "killed":
+                self.widgets.remove(widget)
+            
             if widget.is_visible and widget.is_enabled and widget.is_clickable:
                 was_hovered = widget.is_hovered
                 widget.is_hovered = widget.rectangle.collidepoint(mouse_pos)
