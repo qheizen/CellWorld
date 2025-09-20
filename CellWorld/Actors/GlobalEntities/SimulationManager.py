@@ -13,6 +13,7 @@ from CellWorld.Actors.GlobalEntities.GuiManager import GUIManager
 from CellWorld.Actors.GlobalEntities.SaverManager import SaveManager
 from CellWorld.Actors.GUI.DebugConsole import DebugConsoleObject
 import CellWorld.Tools.Logger.loggers as lg
+from collections import defaultdict
 
 _logger = lg.get_module_logger("GameManager")
 class Simulation:
@@ -40,6 +41,12 @@ class Simulation:
         self.is_window_spawn: bool = False
         
         self._quit = True
+        
+        self._cell_statistic = []
+        self._world_statistic = []
+        
+        self.delay: float = 0.1
+        self._mega_clock: float = 0
         
     def initialize_game(self, path: str):
         serializer = sr.WorldSerializer()
@@ -93,7 +100,13 @@ class Simulation:
             if not self.is_change_cell and self.control_cell:
                 self.control_cell.control(pygame.key.get_pressed())
             
-            self._gui.update(1/60)  
+            self._gui.update(1/60)
+            
+            self.delay -= 1/60
+            self._mega_clock += 1/60
+            if self.delay < 0:
+                self.collect_stats()
+                self.delay = 5
                   
             for actor in list(self._actual_entities_on_board):
                 try:
@@ -191,3 +204,39 @@ class Simulation:
             self.spawn_to_world(cell)
         elif self.pointer_is_busy and self.is_window_spawn:
             self._console_manager.console_print(f"Error - Cant spawn cell. (name: {self.cell_type_name}). Usable types names - {self.game_manager.get_cell_types_names()} ")
+            
+            
+    
+    def collect_stats(self):
+        name_count = defaultdict(int)
+        total_speed = 0.0
+        cell_count = len(self._actual_entities_on_board)
+        
+        if len(self._cell_statistic) > 15 or len(self._world_statistic) > 15:
+            self._cell_statistic.pop(0)
+            self._world_statistic.pop(0)
+
+        for cell in self._actual_entities_on_board:
+            name_count[cell._name] += 1
+            if hasattr(cell, '_vec_velocity'):        
+                speed = cell._vec_velocity.length()
+                total_speed += speed
+        
+        average_speed = total_speed / cell_count if cell_count > 0 else 0.0
+        current_time = self._mega_clock
+        
+        if not hasattr(self, '_fixed_names'):
+            all_names = set()
+            for cell in self._actual_entities_on_board:
+                all_names.add(cell._name)
+            self._fixed_names = sorted(all_names)
+        
+        count_array = [current_time]
+        for name in self._fixed_names:
+            count_array.append(name_count.get(name, 0))
+        
+        self._cell_statistic.append(count_array)
+        
+        speed_array = [current_time, average_speed]
+        self._world_statistic.append(speed_array)
+        return

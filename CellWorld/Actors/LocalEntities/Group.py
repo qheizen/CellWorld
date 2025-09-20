@@ -61,6 +61,7 @@ class Group(actor.Actor):
                 continue
             
             new_cell = prototype.clone()
+            new_cell.set_position(self._vec_position)
             random_vector_shift = static.random_vector(-self._spawn_radius, self._spawn_radius)
             new_cell.add_position(random_vector_shift)
             
@@ -89,3 +90,6 @@ class Group(actor.Actor):
         new._cells_count = self._cells_count
         new._spawn_radius = self._spawn_radius
         return new
+
+    def init_clearing(self):
+        self._object_state = gconst.OBJECT_STATES["disposed"]

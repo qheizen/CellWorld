@@ -62,10 +62,11 @@ class Actor:
     
     
     def init_spawn(self, global_manager, spawn_cords = None):
+        self._world_manager = global_manager
+        
         if spawn_cords:
             self.set_position(static.convert_to_vec(spawn_cords))
             
-        self._world_manager = global_manager
         if self._vec_position == Vector2(0, 0):
             self.set_position(self._get_random_in_screen_vector())
             

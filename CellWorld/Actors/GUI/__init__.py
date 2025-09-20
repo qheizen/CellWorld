@@ -1,4 +1,4 @@
-from . import ActiveObject, Button, Checkbox, Frame, TextInput, Icon, DebugConsole
+from . import ActiveObject, Button, Checkbox, Frame, TextInput, Icon, DebugConsole, Graph
 
 __all__ = [
     "ActiveObject",
@@ -7,5 +7,6 @@ __all__ = [
     "Frame",
     "TextInput",
     "Icon",
-    "DebugConsole"
+    "DebugConsole",
+    "Graph"
 ]

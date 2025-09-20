@@ -5,6 +5,7 @@ from CellWorld.Actors.GUI.Button import Button
 from CellWorld.Actors.GUI.Icon import Icon
 from CellWorld.Actors.GUI.Checkbox import Checkbox
 from CellWorld.Actors.GUI.Frame import Frame
+from CellWorld.Actors.GUI.Graph import Graph
 from CellWorld.Actors.GUI.TextInput import TextInput
 import CellWorld.Tools.StaticLib as static
 
@@ -236,7 +237,7 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     if console_manager:
         console_manager.console_print("Info - Interface - Main Window opened")
     windows_size = game_manager.get_option("window_size")
-    create_cell_frame = Frame("del_form", (windows_size[0]-71, 200), (71, 347), (47,41,75), "del_cell", padding = 10, offset = 10, board_pad =2)
+    create_cell_frame = Frame("del_form", (windows_size[0]-71, 200), (71, 400), (47,41,75), "del_cell", padding = 10, offset = 10, board_pad =2)
     
     admin_panel = Icon("submit", "", (0, -40), (40, 50), (90, 120, 200), 
                        (255, 255, 255), "no_it", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\admin_ico.png")
@@ -274,6 +275,18 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
         change_cell_to_control(gui_manager, sim_manager)
     botton_cell_control.set_handler(control_cell)
     create_cell_frame.add(botton_cell_control)
+    
+    botton_cell_graph = Icon("screen", "", (0, -80), (40, 50), (90, 120, 200), 
+                       (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\diagram_ico.png")
+    def graph_cell():
+        if sim_manager.pointer_is_busy:
+            if console_manager:
+                console_manager.console_print("Error - Pointer is busy for now, cant operate")
+            _logger.warning("Pointer is busy for now, cant operate")
+            return
+        statistic_screen(gui_manager, sim_manager, console_manager)
+    botton_cell_graph.set_handler(graph_cell)
+    create_cell_frame.add(botton_cell_graph)
     
     botton_cell_plus = Icon("screen", "", (0, -120), (40, 50), (235, 128, 114), 
                        (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_plus_ico.png")
@@ -355,5 +368,54 @@ def exit_screen(gui_manager, sim_manager, console_manager):
     gui_manager.add(create_cell_frame)
     return gui_manager
     
+
+def statistic_screen(gui_manager, sim_manager, console_manager):
+    if console_manager:
+        console_manager.console_print("Info - Interface - Statistic opened")
+        
+        
+    cell_stat = sim_manager._cell_statistic
+    world_stat = sim_manager._world_statistic
+    
+    if len(cell_stat) <= 1 or len(world_stat) <= 1:
+        world_stat = [[0,0],[1,0]]
+        cell_stat = [[0,0],[1,0]]
+        console_manager.console_print("Error - We have not enough information for open. Statistic Closed")
+    
+    
+    create_cell_frame = Frame("admin_panel_graph1", (200, 100), (500, 530), (47,41,75), "statistic")
+    
+    kill2_btn = Button("kill", "Изменение соотношения клеток", (0, -90), (100, 25), (55,51,86), 
+                       (255, 255, 255), "statistic")
+    kill2_btn.is_clickable = False
+    kill2_btn.is_enabled = False
+    create_cell_frame.add(kill2_btn)
+    
+    
+    graph = Graph("graph1", cell_stat, pos=(100, 100), size=(200, 200), color=(67,61,95))
+    graph.set_animation_speed(0.7)
+    create_cell_frame.add(graph)
+    
+    kill1_btn = Button("kill", "Изменение средней скорости", (0, -90), (100, 25), (55,51,86), 
+                       (255, 255, 255), "statistic")
+    kill1_btn.is_clickable = False
+    kill1_btn.is_enabled = False
+    create_cell_frame.add(kill1_btn)
+    
+    graph1 = Graph("graph1", world_stat, pos=(100, 100), size=(200, 200), color=(67,61,95))
+    graph1.set_animation_speed(0.7)
+    create_cell_frame.add(graph1)
+    
+    
+    def kill_window():
+        create_cell_frame.status = "killed"
+        
+    kill_btn = Button("kill", "Закрыть окно", (0, -90), (100, 40), (235, 128, 114), 
+                       (255, 255, 255), "statistic")
+    kill_btn.set_handler(kill_window)
+    create_cell_frame.add(kill_btn)
+    
+    gui_manager.add(create_cell_frame)
+    return gui_manager
     
     
