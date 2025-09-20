@@ -138,6 +138,12 @@ class WorldManager:
             result += f" {type._name}"
         return result
     
+    def get_cell_types_names_list(self):
+        result: list = []
+        for type in self._cell_types:
+            result.append(type)
+        return result
+    
     def set_attribute(self, name, value):
         self._global_options[name] = value
         

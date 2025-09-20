@@ -302,8 +302,8 @@ def main_interface(gui_manager, saver_manager, game_manager, sim_manager, consol
     create_cell_frame.add(botton_cell_minus)
     
     
-    botton_exit = Icon("exit", "exit", (0, -120), (40, 50), (235, 128, 114), 
-                       (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\cell_minus_ico.png" )
+    botton_exit = Icon("exit", "", (0, -120), (40, 50), (235, 128, 114), 
+                       (255, 255, 255), "screen", image_path= r"E:\Python\Fun\CellsWorld\CellWorld\Source\exit_ico.png" )
     def delete_window():
         if sim_manager.pointer_is_busy:
             if console_manager:

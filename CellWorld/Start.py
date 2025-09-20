@@ -21,12 +21,10 @@ class GameScene(simuc.Simulation):
     
     def initialize_spawn(self):
         try:
-            planet = self.game_manager.get_cell_prototype_with_name("namev")
-            planet1 = self.game_manager.get_cell_prototype_with_name("namev1")
-            planet2 = self.game_manager.get_cell_prototype_with_name("namev1")
-            for i in range(30):
-                self.spawn_to_world(planet)
-                self.spawn_to_world(planet2)
+            cells_types = self.game_manager.get_cell_types_names_list()
+            for cell_type in cells_types:
+                for i in range(30):
+                    self.spawn_to_world(cell_type)
         except Exception as e:
             print(f"Error while spawning initial cells: {e}")
 
